@@ -17,7 +17,7 @@ class Bible():
         print(f"| {"#":^5} | {"Livro":<20} | {"Capítulos":<12} | {"Versículos":<10} |")
         print(LINE_BREAK)
 
-        for index, book in enumerate(bible, start=1):
+        for index, book in enumerate(bible, start = 1):
             book_name: str = str(book["book"]).strip()
             chapters: int = len(book["chapters"])
             verses: int = sum(len(chapter["verses"]) for chapter in book["chapters"])
