@@ -1,0 +1,17 @@
+@use "./variables.scss" as *;
+
+.home-page {
+    h2 {
+        margin-bottom: 1.5rem;
+    }
+
+    .card {
+        background-color: #{$muted-color}20;
+        border-radius: 10px;
+        padding: 10px;
+
+        @media (min-width: 1000px) {
+            max-width: 60dvw;
+        }
+    }
+}

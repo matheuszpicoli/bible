@@ -19,3 +19,7 @@ export interface IBibleResponse {
     range?: string
     totalVerses?: number
 }
+
+export interface IBibleData {
+  books: Array<IBibleBook>
+}
