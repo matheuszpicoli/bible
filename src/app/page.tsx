@@ -49,9 +49,8 @@ export default async function Bible(): Promise<React.JSX.Element> {
                     <Image 
                         src={dailyImage} 
                         alt="Imagem do versículo do dia" 
-                        priority={true}
+                        priority
                         fill
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
                     <div className="card-content">
                         <h3 className="card-title">{dailyVerse.book} {dailyVerse.chapter}:{dailyVerse.verse}</h3>
