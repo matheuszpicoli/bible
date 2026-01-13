@@ -1,3 +1,5 @@
+@use "./variables.scss" as *;
+
 @use "sass:map";
 
 @import url("https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400..800&display=swap");
@@ -12,9 +14,6 @@
 
 @each $theme in ("dark", "light") {
     @media (prefers-color-scheme: #{$theme}) {
-        $light-color: #bababa;
-        $dark-color: #121212;
-
         body {
             @if $theme == "light" {
                 background-color: $light-color;
