@@ -26,6 +26,15 @@
     }
 }
 
+footer {
+    color: $muted-color;
+    font-size: .75rem;
+    padding-inline: 10px;
+    pointer-events: none;
+    text-align: center;
+    user-select: none;
+}
+
 [class$="page"] {
     align-items: center;
     display: flex;

@@ -11,7 +11,12 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <html lang="pt-BR">
             <body>
                 <Header />
-                {children}
+                <main>
+                    {children}
+                </main>
+                <footer>
+                    <p>Copyright © {new Date().getFullYear()} | Matheus Picoli. Todos os direitos reservados</p>
+                </footer>
             </body>
         </html>
     )
