@@ -2,11 +2,13 @@ import React, { createElement } from "react"
 import IconManager, { IconName } from "./icons/IconManager"
 
 export default function Header(): React.JSX.Element {
-    function NavbarItem({ icon, text, ...props }: { icon: IconName; text: string } & Omit<React.HTMLAttributes<HTMLDivElement>, "children">): React.JSX.Element {
+    function NavbarItem({ icon, text, ...props }: { icon: IconName; text: string } & Omit<React.HTMLAttributes<HTMLButtonElement>, "children">): React.JSX.Element {
         return (
-            <div className="navbar-item" {...props}>
-                 {createElement(IconManager.get(icon))}
-                {text}
+            <div className="navbar-item">
+                <button name={icon.replaceAll(/([a-z])([A-Z])/g, "$1-$2").toLowerCase()} className="navbar-item-button" {...props}>
+                    {createElement(IconManager.get(icon))}
+                    {text}
+                </button>
             </div>
         )
     }

@@ -28,10 +28,46 @@ header {
             align-items: center;
             display: flex;
             flex-direction: row;
-            gap: 10px;
+            gap: 5px;
+            
+            .navbar-item-button {
+                all: unset;
+                align-items: inherit;
+                backdrop-filter: blur(10px);
+                background: #{$muted-color}15;
+                border-radius: 20px;
+                border: 1px solid #{$muted-color}50;
+                cursor: pointer;
+                display: inherit;
+                flex-direction: inherit;
+                font-size: .9rem;
+                font-weight: 600;
+                gap: 5px;
+                padding: 8px 18px;
+                transition: all 300ms ease;
+                user-select: none;
+                
+                svg {
+                    fill: $primary-color;
+                    transition: all 300ms ease;
+                }
 
-            svg {
-                fill: $primary-color;
+                &:hover:not(:active) {
+                    background: $primary-color;
+                    transform: translateY(-2px);
+                    
+                    svg {
+                        @each $theme in ("dark", "light") {
+                            @media (prefers-color-scheme: #{$theme}) {
+                                @if $theme == "light" {
+                                    fill: $light-color;
+                                } @else {
+                                    fill: $dark-color;
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }
