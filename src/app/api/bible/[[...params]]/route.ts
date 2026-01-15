@@ -2,6 +2,12 @@ import { NextRequest } from "next/server"
 import arcBible from "../../../../../data/arc_bible.json"
 import type { IBibleBook, IBibleVerse, IBibleResponse } from "../../../../../types/types"
 
+interface IValidRequest {
+    valid: boolean
+    chapter?: number
+    error?: Response
+}
+
 class BibleAPIHandler {
     private bibleData: Array<IBibleBook>
 
@@ -16,7 +22,7 @@ class BibleAPIHandler {
     }
 
     private findChapter(book: IBibleBook, chapterNumber: number): IBibleVerse | null {
-        return book.chapters.find(chapter => chapter.chapter === chapterNumber) || null
+        return book.chapters.find((chapter: IBibleVerse) => chapter.chapter === chapterNumber) || null
     }
 
     private getVerseText(chapter: IBibleVerse, verseNumber: number): string | null {
@@ -33,7 +39,7 @@ class BibleAPIHandler {
         return chapter.verses.slice(start - 1, endVerse)
     }
 
-    private validateChapterNumber(chapterParam: string): { valid: boolean; chapter?: number; error?: Response } {
+    private validateChapterNumber(chapterParam: string): IValidRequest {
         const chapterNumber: number = parseInt(chapterParam, 10)
 
         if (isNaN(chapterNumber) || chapterNumber < 1) {
@@ -128,7 +134,9 @@ class BibleAPIHandler {
 
         return Response.json(errorResponse, {
             status,
-            headers: { "Content-Type": "application/json" }
+            headers: {
+                "Content-Type": "application/json"
+            }
         })
     }
 
@@ -139,117 +147,25 @@ class BibleAPIHandler {
             const { searchParams } = new URL(request.url)
             const range: string = searchParams.get("range")
 
-            if (pathParams.length === 0) {
-                return this.createResponse({ 
-                    books: this.bibleData,
-                    totalBooks: this.bibleData.length
-                } as any)
+            switch (pathParams.length) {
+                case 0:
+                    return this.createResponse({ 
+                        books: this.bibleData,
+                        totalBooks: this.bibleData.length
+                    } as any)
+
+                case 1:
+                    return this.handleBookRequest(pathParams)
+
+                case 2:
+                    return this.handleChapterRequest(pathParams, range)
+
+                case 3:
+                    return this.handleVerseRequest(pathParams)
+
+                default:
+                    return this.createErrorResponse("Formato inválido", 400)
             }
-
-            const book: IBibleBook = this.findBook(pathParams[0])
-
-            if (!book) {
-                return this.createErrorResponse(
-                    "Livro não encontrado",
-                    404,
-                    {
-                        suggestions: this.bibleData.map((book: IBibleBook) => ({ 
-                            book: book.book, 
-                            abbreviation: book.abbreviation 
-                        }))
-                    }
-                )
-            }
-
-            if (pathParams.length === 1) {
-                return this.createResponse({
-                    book: book.book,
-                    abbreviation: book.abbreviation,
-                    chapters: book.chapters,
-                    totalChapters: book.chapters.length
-                } as any)
-            }
-
-            const chapterValidation = this.validateChapterNumber(pathParams[1])
-                if (!chapterValidation.valid) {
-                    return chapterValidation.error!
-                }
-
-                const chapter: IBibleVerse = this.findChapter(book, chapterValidation.chapter!)
-                
-                if (!chapter) {
-                    return this.createErrorResponse(
-                        "Capítulo não encontrado",
-                        404,
-                        {
-                            book: book.book,
-                            availableChapters: book.chapters.map((chapter: IBibleVerse) => chapter.chapter)
-                        }
-                    )
-                }
-
-            if (pathParams.length === 2) {
-                if (range) {
-                    const rangeValidation = this.validateRange(chapter, range)
-                    
-                    if (!rangeValidation.valid) {
-                        return rangeValidation.error!
-                    }
-
-                    const verses: Array<string> = this.getVerseRange(chapter, rangeValidation.start!, rangeValidation.end)
-
-                    return this.createResponse({
-                        book: book.book,
-                        abbreviation: book.abbreviation,
-                        chapter: chapter.chapter,
-                        verses,
-                        range: `${rangeValidation.start}${rangeValidation.end !== rangeValidation.start ? `-${rangeValidation.end}` : ''}`,
-                        totalVerses: verses.length
-                    })
-                }
-
-                return this.createResponse({
-                    book: book.book,
-                    abbreviation: book.abbreviation,
-                    chapter: chapter.chapter,
-                    verses: chapter.verses,
-                    totalVerses: chapter.verses.length
-                })
-            }
-
-            if (pathParams.length === 3) {
-                const verseValidation: { valid: boolean; verse?: number; error?: Response } = this.validateVerseNumber(chapter, pathParams[2])
-                
-                if (!verseValidation.valid) {
-                    return verseValidation.error!
-                }
-
-                const verseText: string = this.getVerseText(chapter, verseValidation.verse!)
-
-                if (!verseText) {
-                    return this.createErrorResponse(
-                        "Versículo não encontrado",
-                        404,
-                        {
-                            book: book.book,
-                            chapter: chapter.chapter,
-                            availableVerses: `1-${chapter.verses.length}`
-                        }
-                    )
-                }
-
-                return this.createResponse({
-                    book: book.book,
-                    abbreviation: book.abbreviation,
-                    chapter: chapter.chapter,
-                    verse: verseValidation.verse,
-                    text: verseText,
-                    totalVerses: chapter.verses.length
-                })
-            }
-
-            return this.createErrorResponse("Formato inválido", 400)
-
         } catch (error: unknown) {
             console.error(`[${error?.constructor?.name}]: ${error instanceof Error ? error.message : String(error)}`)
             
@@ -257,15 +173,167 @@ class BibleAPIHandler {
         }
     }
 
-    getAllBooks(): Array<IBibleBook> {
+    private handleBookRequest(pathParams: Array<string>): Response {
+        const book: IBibleBook = this.findBook(pathParams[0])
+
+        if (!book) {
+            return this.createErrorResponse(
+                "Livro não encontrado",
+                404,
+                {
+                    suggestions: this.bibleData.map((book: IBibleBook) => ({ 
+                        book: book.book, 
+                        abbreviation: book.abbreviation 
+                    }))
+                }
+            )
+        }
+
+        return this.createResponse({
+            book: book.book,
+            abbreviation: book.abbreviation,
+            chapters: book.chapters,
+            totalChapters: book.chapters.length
+        } as any)
+    }
+
+    private handleChapterRequest(pathParams: Array<string>, range: string): Response {
+        const book: IBibleBook = this.findBook(pathParams[0])
+
+        if (!book) {
+            return this.createErrorResponse(
+                "Livro não encontrado",
+                404,
+                {
+                    suggestions: this.bibleData.map((book: IBibleBook) => ({ 
+                        book: book.book, 
+                        abbreviation: book.abbreviation 
+                    }))
+                }
+            )
+        }
+
+        const chapterValidation: IValidRequest = this.validateChapterNumber(pathParams[1])
+
+        if (!chapterValidation.valid) {
+            return chapterValidation.error!
+        }
+
+        const chapter: IBibleVerse = this.findChapter(book, chapterValidation.chapter!)
+        
+        if (!chapter) {
+            return this.createErrorResponse(
+                "Capítulo não encontrado",
+                404,
+                {
+                    book: book.book,
+                    availableChapters: book.chapters.map((chapter: IBibleVerse) => chapter.chapter)
+                }
+            )
+        }
+
+        if (range) {
+            const rangeValidation: { valid: boolean; start?: number; end?: number; error?: Response } = this.validateRange(chapter, range)
+            
+            if (!rangeValidation.valid) {
+                return rangeValidation.error!
+            }
+
+            const verses: Array<string> = this.getVerseRange(chapter, rangeValidation.start!, rangeValidation.end)
+
+            return this.createResponse({
+                book: book.book,
+                abbreviation: book.abbreviation,
+                chapter: chapter.chapter,
+                verses,
+                range: `${rangeValidation.start}${rangeValidation.end !== rangeValidation.start ? `-${rangeValidation.end}` : ""}`,
+                totalVerses: verses.length
+            })
+        }
+
+        return this.createResponse({
+            book: book.book,
+            abbreviation: book.abbreviation,
+            chapter: chapter.chapter,
+            verses: chapter.verses,
+            totalVerses: chapter.verses.length
+        })
+    }
+
+    private handleVerseRequest(pathParams: Array<string>): Response {
+        const book: IBibleBook = this.findBook(pathParams[0])
+
+        if (!book) {
+            return this.createErrorResponse(
+                "Livro não encontrado",
+                404,
+                {
+                    suggestions: this.bibleData.map((book: IBibleBook) => ({ 
+                        book: book.book, 
+                        abbreviation: book.abbreviation 
+                    }))
+                }
+            )
+        }
+
+        const chapterValidation: IValidRequest = this.validateChapterNumber(pathParams[1])
+
+        if (!chapterValidation.valid) {
+            return chapterValidation.error!
+        }
+
+        const chapter: IBibleVerse = this.findChapter(book, chapterValidation.chapter!)
+        
+        if (!chapter) {
+            return this.createErrorResponse(
+                "Capítulo não encontrado",
+                404,
+                {
+                    book: book.book,
+                    availableChapters: book.chapters.map((chapter: IBibleVerse) => chapter.chapter)
+                }
+            )
+        }
+
+        const verseValidation: { valid: boolean; verse?: number; error?: Response } = this.validateVerseNumber(chapter, pathParams[2])
+        
+        if (!verseValidation.valid) {
+            return verseValidation.error!
+        }
+
+        const verseText: string = this.getVerseText(chapter, verseValidation.verse!)
+
+        if (!verseText) {
+            return this.createErrorResponse(
+                "Versículo não encontrado",
+                404,
+                {
+                    book: book.book,
+                    chapter: chapter.chapter,
+                    availableVerses: `1-${chapter.verses.length}`
+                }
+            )
+        }
+
+        return this.createResponse({
+            book: book.book,
+            abbreviation: book.abbreviation,
+            chapter: chapter.chapter,
+            verse: verseValidation.verse,
+            text: verseText,
+            totalVerses: chapter.verses.length
+        })
+    }
+
+    public getAllBooks(): Array<IBibleBook> {
         return this.bibleData
     }
 
-    getBookByName(name: string): IBibleBook | null {
+    public getBookByName(name: string): IBibleBook | null {
         return this.findBook(name)
     }
 
-    getChapter(bookName: string, chapterNumber: number): { book: IBibleBook; chapter: IBibleVerse } | null {
+    public getChapter(bookName: string, chapterNumber: number): { book: IBibleBook; chapter: IBibleVerse } | null {
         const book: IBibleBook = this.findBook(bookName)
         
         if (!book) {
@@ -285,8 +353,6 @@ class BibleAPIHandler {
     }
 }
 
-const bibleAPIHandler: BibleAPIHandler = new BibleAPIHandler()
-
 export async function GET(request: NextRequest, { params }: { params: Promise<{ params?: Array<string> }> }): Promise<Response> {
-    return bibleAPIHandler.handleRequest(request, params)
+    return new BibleAPIHandler().handleRequest(request, params)
 }
