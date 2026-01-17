@@ -1,0 +1,25 @@
+@use "./variables.scss" as *;
+
+.loader {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    overflow: hidden;
+
+    .spinner {
+        animation: spin 1000ms infinite linear;
+        border-radius: 50%;
+        border: 8px solid $muted-color;
+        border-top-color: $primary-color;
+        height: 50px;
+        transform: scale(.5);
+        width: 50px;
+    }
+}
+
+@keyframes spin {
+    to {
+        transform: scale(.5) rotate(1turn);
+    }
+}

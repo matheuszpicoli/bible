@@ -1,11 +1,14 @@
-import { FaBookBible, FaGripfire, FaListUl } from "react-icons/fa6"
+import { FaBookBible, FaGripfire, FaListUl, FaXmark, FaChevronDown, FaChevronUp } from "react-icons/fa6"
 import type { IconType } from "react-icons"
 
 export type IconName = 
     "bible"         |
     "christianHarp" |
-    "more"
-
+    "more"          |
+    "close"         |
+    "arrowDown"   |
+    "arrowUp"
+     
 class IconManager {
     private static icons: Partial<Record<string, IconType>> = {}
 
@@ -33,6 +36,9 @@ class IconManager {
         this.set("bible", FaBookBible)
         this.set("christianHarp", FaGripfire)
         this.set("more", FaListUl)
+        this.set("close", FaXmark)
+        this.set("arrowDown", FaChevronDown)
+        this.set("arrowUp", FaChevronUp)
     }
 }
 

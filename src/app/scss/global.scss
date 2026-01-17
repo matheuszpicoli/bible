@@ -10,6 +10,30 @@
     font-optical-sizing: auto;
     margin: 0;
     padding: 0;
+
+    &::selection {
+        background: $primary-color;
+        color: $dark-color;
+    }
+
+    &::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    &::-webkit-scrollbar-track {
+        display: none;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: $muted-color;
+        border-radius: 20px;
+        cursor: default;
+
+        &:hover,
+        &:active {
+            background: #{$muted-color}98;
+        }
+    }
 }
 
 @each $theme in ("dark", "light") {

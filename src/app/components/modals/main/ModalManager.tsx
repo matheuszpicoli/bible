@@ -1,8 +1,9 @@
-import React, { useLayoutEffect } from "react"
+import React, { createElement, useLayoutEffect } from "react"
+import IconManager from "../../icons/IconManager"
 
 export type TModal = "bible" | "christian-harp" | "more"
 
-export default function ModalManager({ isOpen, onClose, children, title }: { isOpen: boolean; onClose: () => void; children: React.ReactNode; title: string }): React.JSX.Element | null {
+export default function ModalManager({ name, isOpen, onClose, children, title }: { name: TModal, isOpen: boolean; onClose: () => void; children: React.ReactNode; title: string }): React.JSX.Element | null {
     useLayoutEffect((): () => void => {
         if (isOpen) {
             document.body.style.overflow = "hidden"
@@ -32,15 +33,15 @@ export default function ModalManager({ isOpen, onClose, children, title }: { isO
 
     if (isOpen) {
         return (
-            <div onClick={handleBackdropClick}>
-                <div onClick={(event): void => event.stopPropagation()}>
-                    <div>
+            <div className="modal-backdrop" onClick={handleBackdropClick}>
+                <div className="modal-container" onClick={(event): void => event.stopPropagation()}>
+                    <div className="modal-header">
                         <strong>{title}</strong>
                         <button onClick={onClose} aria-label="Fechar modal">
-                            X
+                            {createElement(IconManager.get("close"))}
                         </button>
                     </div>
-                    <div>
+                    <div id={`${name}-modal`} className="modal-content">
                         {children}
                     </div>
                 </div>

@@ -1,0 +1,190 @@
+@use "./variables.scss" as *;
+
+.modal-backdrop {
+    align-items: center;
+    animation: fade-in 300ms ease;
+    backdrop-filter: blur(10px) brightness(0.65);
+    display: flex;
+    height: 100dvh;
+    inset: 0;
+    justify-content: center;
+    position: fixed;
+    width: 100dvw;
+    z-index: 1000;
+
+    @each $theme in ("dark", "light") {
+        @media (prefers-color-scheme: #{$theme}) {
+            @if $theme == "light" {
+                background-color: #{$light-color}60;
+            } @else {
+                background-color: #{$dark-color}60;
+            }
+        }
+    }
+    
+    .modal-container {
+        animation: slide-up 400ms ease;
+        backdrop-filter: blur(16px) saturate(140%);
+        border-radius: 20px;
+        border: 1px solid #{$muted-color}50;
+        cursor: default;
+        display: flex;
+        flex-direction: column;
+        font-weight: 600;
+        gap: 10px;
+        max-height: 90dvh;
+        max-width: 600px;
+        padding: 8px 18px;
+        user-select: none;
+        width: 100%;
+
+        @each $theme in ("dark", "light") {
+            @media (prefers-color-scheme: #{$theme}) {
+                @if $theme == "light" {
+                    background: #{$dark-color}15;
+                } @else {
+                    background: #{$light-color}15;
+                }
+            }
+        }
+        
+        .modal-header {
+            align-items: center;
+            display: flex;
+            gap: 10px;
+            justify-content: space-between;
+        
+            strong {
+                font-size: 1.4rem;
+            }
+        
+            button {
+                all: unset;
+                align-items: center;
+                border-radius: 50%;
+                border: 1px solid #{$muted-color}50;
+                cursor: pointer;
+                display: flex;
+                font-size: 1.2rem;
+                justify-content: center;
+                padding: 5px;
+                transition: all 150ms ease;
+
+                @each $theme in ("dark", "light") {
+                    @media (prefers-color-scheme: #{$theme}) {
+                        @if $theme == "light" {
+                            background-color: #{$light-color}60;
+                        } @else {
+                            background-color: #{$dark-color}60;
+                        }
+                    }
+                }
+        
+                &:hover:not(:active) {
+                    background-color: $primary-color;
+        
+                    svg {
+                        fill: $dark-color;
+                    }
+                }
+        
+                &:active {
+                    transform: scale(.85);
+                }
+        
+                svg {
+                    fill: $primary-color;
+                }
+            }
+        }
+        
+        .modal-content {
+            overflow-y: auto;
+        }
+    }
+}
+
+@keyframes fade-in {
+    from {
+        filter: blur(100px);
+        opacity: 0;
+    } to {
+        filter: none;
+        opacity: 1;
+    }
+}
+
+@keyframes slide-up {
+    from {
+        opacity: 0;
+        transform: translateY(5cm) scale(.5);
+    } to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.books-list {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin: 20px;
+
+    .book-accordion-header {
+        cursor: pointer;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        
+        .book-title {
+            font-weight: 600;
+        
+            + .book-accordion-icon {
+                color: $primary-color;
+            }
+        }
+    }
+
+    .book-accordion-content {
+        padding: 20px;
+        
+        .chapters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+            gap: 10px;
+        }
+        
+        .chapter-button {
+            backdrop-filter: blur(10px);
+            background: #{$muted-color}15;
+            border-radius: 20px;
+            border: 1px solid #{$muted-color}50;
+            cursor: pointer;
+            display: inline-block;
+            font-size: .9rem;
+            font-weight: 600;
+            padding: 8px 18px;
+            transition: all 300ms ease;
+            user-select: none;
+
+            @each $theme in ("dark", "light") {
+                @media (prefers-color-scheme: #{$theme}) {
+                    @if $theme == "light" {
+                        color: $dark-color;
+                    } @else {
+                        color: $light-color;
+                    }
+                }
+            }
+            
+            &:hover:not(:active) {
+                background-color: $primary-color;
+                border-color: $primary-color;
+            }
+        
+            &:active {
+                transform: scale(.85);
+            }
+        }
+    }
+}

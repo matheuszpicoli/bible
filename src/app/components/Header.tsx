@@ -67,7 +67,7 @@ export default function Header(): React.JSX.Element {
                 }[activeModal]
 
                 return (
-                    <ModalManager isOpen={Boolean(activeModal)} onClose={handleCloseModal} title={modalConfig.title}>
+                    <ModalManager name={activeModal} isOpen={Boolean(activeModal)} onClose={handleCloseModal} title={modalConfig.title}>
                         {modalConfig.modal}
                     </ModalManager>
                 )
