@@ -1,0 +1,217 @@
+@use "./variables.scss" as *;
+
+@use "sass:meta";
+@use "sass:string";
+
+.books-list {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin: 20px;
+
+    .books-list-search {
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        
+        div {
+            align-items: center;
+            display: inherit;
+            flex-direction: row;
+            gap: 5px;
+            justify-content: center;
+        }
+        
+        .search-input-wrapper {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            position: relative;
+            
+            .input-find-book {
+                all: unset;
+                border-radius: 20px;
+                border: 1px solid #{$muted-color}50;
+                caret-color: $primary-color;
+                cursor: text;
+                flex: 1;
+                font-weight: normal;
+                padding: 10px;
+                padding-left: 45px;
+                transition: all 300ms ease;
+                
+                @each $theme in ("dark", "light") {
+                    @media (prefers-color-scheme: #{$theme}) {
+                        @if $theme == "light" {
+                            background: #{$dark-color}15;
+                        } @else {
+                            background: #{$light-color}15;
+                        }
+                    }
+                }
+
+                &::-webkit-calendar-picker-indicator {
+                    display: none !important;
+                }
+
+                &::-webkit-search-cancel-button {
+                    appearance: none;
+                    background-image: url("data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"%23#{string.slice(meta.inspect($muted-color), 2)}\"><path d=\"M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z\"/></svg>");
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    cursor: pointer;
+                    height: 20px;
+                    transition: all 300ms ease;
+                    width: 20px;
+
+                    &:hover:not(:active) {
+                        background-image: url("data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"%23#{string.slice(meta.inspect($primary-color), 2)}\"><path d=\"M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z\"/></svg>");
+                    }
+
+                    &:active {
+                        transform: scale(.85);
+                    }
+                }
+
+                &:hover:not(:active, :focus) {
+                    opacity: .75;
+                }
+
+                &:active {
+                    @each $theme in ("dark", "light") {
+                        @media (prefers-color-scheme: #{$theme}) {
+                            @if $theme == "light" {
+                                background: #{$dark-color}10;
+                            } @else {
+                                background: #{$light-color}10;
+                            }
+                        }
+                    }
+
+                    &::placeholder {
+                        opacity: .7;
+                        transition: all 300ms ease;
+                    }
+
+                    + .label-find-book {
+                        transform: scaleX(-1);
+                    }
+                }
+                
+                + .label-find-book {
+                    align-items: center;
+                    color: $muted-color;
+                    color: $primary-color;
+                    display: flex;
+                    font-size: 1.4rem;
+                    height: 100%;
+                    left: 15px;
+                    pointer-events: none;
+                    position: absolute;
+                    transform: scale(calc(-1 * .75), .75);
+                    transition: all 300ms ease;
+                }
+            }
+        }
+    }
+
+    .book-testament {
+        color: $primary-color;
+        pointer-events: none;
+        text-align: center;
+    }
+
+    .books-found {
+        font-weight: 300;
+        opacity: .5;
+        pointer-events: none;
+    }
+
+    .book-accordion {
+        .book-accordion-header {
+            cursor: pointer;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            transition: all 300ms ease;
+
+            &:hover:not(:active) {
+                opacity: .5;
+                padding-inline: 5px;
+            }
+            
+            .book-title {
+                font-weight: 600;
+            
+                + .book-accordion-icon {
+                    color: $primary-color;
+                }
+            }
+        }
+    
+        .book-accordion-content {
+            border-bottom: 1px solid #{$muted-color}50;
+            padding: 20px;
+            
+            .chapters-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+                gap: 10px;
+            }
+            
+            .chapter-link {
+                align-items: center;
+                backdrop-filter: blur(10px);
+                background: #{$muted-color}15;
+                border-radius: 20px;
+                border: 1px solid #{$muted-color}50;
+                cursor: pointer;
+                display: flex;
+                flex-direction: row;
+                font-size: .9rem;
+                font-weight: 600;
+                justify-content: center;
+                padding: 8px 18px;
+                text-decoration: none;
+                transition: all 300ms ease;
+                user-select: none;
+    
+                @each $theme in ("dark", "light") {
+                    @media (prefers-color-scheme: #{$theme}) {
+                        @if $theme == "light" {
+                            color: $dark-color;
+                        } @else {
+                            color: $light-color;
+                        }
+                    }
+                }
+                
+                &:hover:not(:active) {
+                    background-color: $primary-color;
+                    border-color: $primary-color;
+                }
+            
+                &:active {
+                    transform: scale(.85);
+                }
+
+                @for $child from 1 through 150 {
+                    &:nth-child(#{$child}) {
+                        animation: appear-from-top 500ms ease calc(#{$child} * 5ms) both;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@keyframes appear-from-top {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    } to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
