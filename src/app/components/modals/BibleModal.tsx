@@ -61,7 +61,7 @@ export default function BibleModal(): React.JSX.Element {
                                 }
                                 
                                 return (
-                                    <Link key={chapter} href={href} className="chapter-link" onClick={closeModal}>
+                                    <Link key={chapter} href={href} className="chapter-link" onClick={closeModal} style={{ animation: `appear-from-top 500ms ease ${chapterIndex * 5}ms both` }}>
                                         {chapter}
                                     </Link>
                                 )

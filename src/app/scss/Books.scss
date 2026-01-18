@@ -1,0 +1,202 @@
+@use "./variables.scss" as *;
+
+.book-bible {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+    margin: 10px;
+    padding: 10px;
+
+    .container {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        justify-content: center;
+        margin: 10px;
+        max-width: 50dvw;
+
+        @media (max-width: 1024px) {
+            max-width: 70dvw;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+
+            select {
+                all: unset;
+                align-items: center;
+                appearance: none;
+                background-color: #{$muted-color}15;
+                border-radius: 20px;
+                border: 1px solid #{$muted-color}50;
+                color: $primary-color;
+                cursor: pointer;
+                display: flex;
+                justify-content: center;
+                padding: 5px 10px;
+                position: relative;
+                transition: all 150ms ease;
+                user-select: none;
+
+                &:disabled {
+                    opacity: .65;
+                    pointer-events: none;
+                }
+            }
+
+            button {
+                all: unset;
+                align-items: center;
+                background-color: #{$muted-color}15;
+                border-radius: 20px;
+                border: 1px solid #{$muted-color}50;
+                cursor: pointer;
+                display: flex;
+                font-size: 1.2rem;
+                justify-content: center;
+                padding: 5px 10px;
+                position: relative;
+                transition: all 150ms ease;
+        
+                &:hover:not(:active) {
+                    background-color: $primary-color;
+        
+                    svg {
+                        fill: $dark-color;
+                    }
+                }
+        
+                &:active {
+                    transform: scale(.85);
+                }
+        
+                svg {
+                    fill: $primary-color;
+                }
+            }
+        }
+
+        .chapter {
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-block: 30px;
+            pointer-events: none;
+            position: relative;
+            user-select: none;
+            
+            .chapter-number {
+                animation: appear-from-top 500ms 25ms both;
+                display: inline-block;
+            }
+        }
+
+        .content {
+            align-items: center;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            position: relative;
+            width: 100%;
+
+            .verses {
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+
+                .verse {
+                    color: $muted-color;
+                    font-size: .65rem;
+                    font-style: italic;
+                    font-weight: 600;
+                    margin-inline: 5px;
+                    opacity: .5;
+                    user-select: none;
+                }
+                
+                .text {
+                    display: inline;
+                    line-height: 1.8;
+                    text-indent: -10px;
+                    word-spacing: 2.5px;
+                }
+            }
+
+            .navigation-button {
+                all: unset;
+                align-items: center;
+                backdrop-filter: blur(10px);
+                background: #{$muted-color}15;
+                border-radius: 20px;
+                border: 1px solid #{$muted-color}50;
+                cursor: pointer;
+                display: flex;
+                flex-direction: row;
+                font-size: .9rem;
+                font-weight: 600;
+                justify-content: center;
+                padding: 10px;
+                position: fixed;
+                top: 50%;
+                transform: translateY(-50%);
+                transition: all 300ms ease;
+                user-select: none;
+
+                svg {
+                    fill: $primary-color;
+                    transition: all 300ms ease;
+                }
+
+                &.previous {
+                    left: 5%;
+                }
+
+                &.next {
+                    right: 5%;
+                }
+
+                &:hover:not(:active) {
+                    background: $primary-color;
+
+                    &.previous {
+                        transform: translate(-5px, -50%);
+                    }
+
+                    &.next {
+                        transform: translate(5px, -50%);
+                    }
+
+                    svg {
+                        @each $theme in ("dark", "light") {
+                            @media (prefers-color-scheme: #{$theme}) {
+                                @if $theme == "light" {
+                                    fill: #{$light-color};
+                                } @else {
+                                    fill: #{$dark-color};
+                                }
+                            }
+                        }
+                    }
+                }
+        
+                &:active {
+                    transform: scale(.9) translateY(-50%);
+                    
+                    &.previous {
+                        transform: scale(.9) translate(-5px, -50%);
+                    }
+
+                    &.next {
+                        transform: scale(.9) translate(5px, -50%);
+                    }
+                }
+            }
+        }
+    }
+}

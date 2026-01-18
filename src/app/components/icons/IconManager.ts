@@ -5,7 +5,12 @@ import {
     FaXmark,
     FaChevronDown,
     FaChevronUp,
-    FaMagnifyingGlass
+    FaMagnifyingGlass,
+    FaChevronLeft,
+    FaChevronRight,
+    FaVolumeHigh,
+    FaVolumeXmark,
+    FaEllipsis
 } from "react-icons/fa6"
 import type { IconType } from "react-icons"
 
@@ -16,7 +21,12 @@ export type IconName =
     "close"         |
     "arrowDown"     |
     "arrowUp"       |
-    "search"
+    "arrowLeft"     |
+    "arrowRight"    |
+    "search"        |
+    "volume"        |
+    "muted"         |
+    "dots"
      
 class IconManager {
     private static icons: Partial<Record<string, IconType>> = {}
@@ -48,7 +58,12 @@ class IconManager {
         this.set("close", FaXmark)
         this.set("arrowDown", FaChevronDown)
         this.set("arrowUp", FaChevronUp)
+        this.set("arrowLeft", FaChevronLeft)
+        this.set("arrowRight", FaChevronRight)
         this.set("search", FaMagnifyingGlass)
+        this.set("volume", FaVolumeHigh)
+        this.set("muted", FaVolumeXmark)
+        this.set("dots", FaEllipsis)
     }
 }
 

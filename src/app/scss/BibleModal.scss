@@ -195,12 +195,6 @@
                 &:active {
                     transform: scale(.85);
                 }
-
-                @for $child from 1 through 150 {
-                    &:nth-child(#{$child}) {
-                        animation: appear-from-top 500ms ease calc(#{$child} * 5ms) both;
-                    }
-                }
             }
         }
     }
