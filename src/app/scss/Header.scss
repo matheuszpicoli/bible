@@ -10,10 +10,16 @@ header {
     user-select: none;
 
     .logo {
+        cursor: pointer;
         letter-spacing: -.5px;
+        transition: all 300ms ease;
 
         span {
             color: $primary-color;
+        }
+
+        &:hover:not(:active) {
+            opacity: .5;
         }
     }
     

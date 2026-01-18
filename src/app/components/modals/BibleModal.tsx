@@ -106,7 +106,7 @@ export default function BibleModal(): React.JSX.Element {
                 <div className="books-list">
                     <div className="books-list-search">
                         <div className="search-input-wrapper">
-                            <input type="search" name="input-find-book" className="input-find-book" id="input-find-book" list="books-list" placeholder="Pesquisar" value={searchTerm}onChange={handleSearchChange} autoFocus />
+                            <input type="search" name="input-find-book" className="input-find-book" id="input-find-book" list="books-list" placeholder="Pesquisar" value={searchTerm} onChange={handleSearchChange} autoComplete="off" autoFocus />
                             <label className="label-find-book" htmlFor="input-find-book">
                                 {createElement(IconManager.get("search"))}
                             </label>

@@ -1,14 +1,6 @@
 @use "./variables.scss" as *;
 
-.book-bible {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    justify-content: center;
-    margin: 10px;
-    padding: 10px;
-
+.book-bible-page {
     .container {
         align-items: center;
         display: flex;
@@ -44,6 +36,7 @@
                 user-select: none;
 
                 &:disabled {
+                    color: $muted-color;
                     opacity: .65;
                     pointer-events: none;
                 }
@@ -121,6 +114,7 @@
                 }
                 
                 .text {
+                    cursor: default;
                     display: inline;
                     line-height: 1.8;
                     text-indent: -10px;

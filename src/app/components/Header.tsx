@@ -40,7 +40,7 @@ export default function Header(): React.JSX.Element {
     return (
         <React.Fragment>
             <header>
-                <h1 className="logo">
+                <h1 className="logo" onClick={(): string => window.location.href = "/"}>
                     <span>MP</span> Bible
                 </h1>
                 <nav className="navbar">

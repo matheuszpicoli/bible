@@ -1,13 +1,13 @@
 import React, { createElement } from "react"
 import type { IBibleBook, IBibleResponse } from "../../../../../types/types"
 import IconManager from "../../../components/icons/IconManager"
-import Link from "next/link"
+import Link, { LinkProps } from "next/link"
 import TitleManager from "../../../components/TitleManager"
 
 type TDirection = "previous" | "next"
 
 interface IChapterInfo {
-    bookName: string
+    bookAbbreviation: string
     chapterNumber: number
 }
 
@@ -35,7 +35,7 @@ export default async function Books({ params }: { params: Promise<{ book: string
             case "previous":
                 if (currentChapter > 1) {
                     chapterInfo = {
-                        bookName: currentBook.book,
+                        bookAbbreviation: currentBook.abbreviation,
                         chapterNumber: currentChapter - 1
                     }
                 } else if (currentBookIndex > 0) {
@@ -43,7 +43,7 @@ export default async function Books({ params }: { params: Promise<{ book: string
                     const previousBookTotalChapters: number = previousBook.chapters.length
                 
                     chapterInfo = {
-                        bookName: previousBook.book,
+                        bookAbbreviation: previousBook.abbreviation,
                         chapterNumber: previousBookTotalChapters
                     }
                 }
@@ -53,14 +53,14 @@ export default async function Books({ params }: { params: Promise<{ book: string
             case "next":
                 if (currentChapter < currentBookTotalChapters) {
                     chapterInfo = {
-                        bookName: currentBook.book,
+                        bookAbbreviation: currentBook.abbreviation,
                         chapterNumber: currentChapter + 1
                     }
                 } else if (currentBookIndex < allBooksData.books.length - 1) {
                     const nextBook: IBibleBook = allBooksData.books[currentBookIndex + 1]
                     
                     chapterInfo = {
-                        bookName: nextBook.book,
+                        bookAbbreviation: nextBook.abbreviation,
                         chapterNumber: 1
                     }
                 }
@@ -69,7 +69,7 @@ export default async function Books({ params }: { params: Promise<{ book: string
         }
         
         if (chapterInfo) {
-            const link: string = `/books/${encodeURIComponent(chapterInfo.bookName.toLowerCase())}/${chapterInfo.chapterNumber}`
+            const link: string = `/books/${encodeURIComponent(chapterInfo.bookAbbreviation.toLowerCase())}/${chapterInfo.chapterNumber}`
             
             return {
                 info: chapterInfo,
@@ -85,11 +85,10 @@ export default async function Books({ params }: { params: Promise<{ book: string
 
     function NavigationButton({ direction, data }: { direction: TDirection; data: INavigation }): React.JSX.Element {
         if (data.link && data.info) {
-            const { bookName, chapterNumber } = data.info
             const isPrevious: boolean = direction === "previous"
             
             return (
-                <Link href={data.link} className={`navigation-button ${direction}`} aria-label={`${bookName} ${chapterNumber}`} prefetch={true}>
+                <Link href={data.link} className={`navigation-button ${direction}`} prefetch={true}>
                     {createElement(IconManager.get(isPrevious ? "arrowLeft" : "arrowRight"))}
                 </Link>
             )
@@ -100,8 +99,8 @@ export default async function Books({ params }: { params: Promise<{ book: string
 
     return (
         <React.Fragment>
-            {/* <TitleManager title={`${chapterData.book} ${chapterData.chapter} (ARC)`} /> */}
-            <section className="book-bible">
+            <TitleManager title={`${chapterData.book} ${chapterData.chapter} (ARC)`} />
+            <section className="book-bible-page">
                 <div className="container">
                     <div className="options">
                         <select disabled>
