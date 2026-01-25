@@ -5,7 +5,7 @@ import ModalManager, { TModal } from "./modals/main/ModalManager"
 import BibleModal from "./modals/BibleModal"
 import ChristianHarpModal from "./modals/ChristianHarpModal"
 import MoreModal from "./modals/MoreModal"
-import IconManager, { IconName } from "./icons/IconManager"
+import IconManager, { TIconName } from "./icons/IconManager"
 
 export default function Header(): React.JSX.Element {
     const [activeModal, setActiveModal] = useState<TModal>()
@@ -14,7 +14,7 @@ export default function Header(): React.JSX.Element {
         return iconName.replaceAll(/([a-z])([A-Z])/g, "$1-$2").toLowerCase() as TModal
     }
 
-    function NavbarItem({ icon, text, ...props }: { icon: IconName; text: string } & Omit<React.HTMLAttributes<HTMLButtonElement>, "children">): React.JSX.Element {
+    function NavbarItem({ icon, text, ...props }: { icon: TIconName; text: string } & Omit<React.HTMLAttributes<HTMLButtonElement>, "children">): React.JSX.Element {
         const handleClick = (event: React.MouseEvent<HTMLButtonElement>): void => {
             if (props.onClick) {
                 props.onClick(event)

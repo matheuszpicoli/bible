@@ -14,7 +14,7 @@
             border-radius: 20px;
             box-shadow: 0 10px 30px #{$muted-color}30;
             cursor: default;
-            height: 70dvh;
+            height: calc(70dvh - 20px);
             overflow: hidden;
             position: relative;
             transition: all 300ms ease;

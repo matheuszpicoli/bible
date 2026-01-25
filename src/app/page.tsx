@@ -1,6 +1,7 @@
 import Image from "next/image"
 import React from "react"
 import type { IBibleBook, IBibleData, IBibleResponse, IBibleVerse } from "../../types/types"
+import Link from "next/link"
 
 export default async function Bible(): Promise<React.JSX.Element> {
     const response: Response = await fetch("http://localhost:3000/api/bible", { cache: "no-store" })
@@ -58,9 +59,12 @@ export default async function Bible(): Promise<React.JSX.Element> {
                             {dailyVerse.text}
                         </q>
                         <div className="card-tags">
-                            <button className="tag">Bíblia</button>
-                            <button className="tag">Versículo</button>
-                            <button className="tag">Inspiração</button>
+                            <Link href={`/books/${dailyVerse.abbreviation.toLowerCase()}/${dailyVerse.chapter}`} className="tag">
+                                Bíblia
+                            </Link>
+                            <Link href={`/about/${dailyVerse.abbreviation.toLowerCase()}`} className="tag">
+                                Sobre {dailyVerse.book}
+                            </Link>
                         </div>
                     </div>
                 </div>

@@ -1,8 +1,10 @@
 import React, { createElement } from "react"
 import type { IBibleBook, IBibleResponse } from "../../../../../types/types"
 import IconManager from "../../../components/icons/IconManager"
-import Link, { LinkProps } from "next/link"
+import Link from "next/link"
 import TitleManager from "../../../components/TitleManager"
+import AudioPlayerButton from "../../../components/AudioPlayerButton"
+import ChapterOptions from "../../../components/ChapterOptions"
 
 type TDirection = "previous" | "next"
 
@@ -83,12 +85,12 @@ export default async function Books({ params }: { params: Promise<{ book: string
         }
     }
 
-    function NavigationButton({ direction, data }: { direction: TDirection; data: INavigation }): React.JSX.Element {
+    function NavigationButton({ direction, data, ...props }: { direction: TDirection; data: INavigation } & Omit<React.HTMLAttributes<HTMLAnchorElement>, "children">): React.JSX.Element {
         if (data.link && data.info) {
             const isPrevious: boolean = direction === "previous"
             
             return (
-                <Link href={data.link} className={`navigation-button ${direction}`} prefetch={true}>
+                <Link href={data.link} className={`navigation-button ${direction}`} prefetch={true} {...props}>
                     {createElement(IconManager.get(isPrevious ? "arrowLeft" : "arrowRight"))}
                 </Link>
             )
@@ -106,31 +108,27 @@ export default async function Books({ params }: { params: Promise<{ book: string
                         <select disabled>
                             <option value="ARC">ARC</option>
                         </select>
-                        <button>
-                            {createElement(IconManager.get("volume"))}
-                        </button>
-                        <button>
-                            {createElement(IconManager.get("dots"))}
-                        </button>
+                        <AudioPlayerButton verses={chapterData.verses} book={chapterData.book} chapter={chapterData.chapter} />
+                        <ChapterOptions />
                     </div>
                     <div className="chapter">
                         <h1>{chapterData.book} <span className="chapter-number">{chapterData.chapter}</span></h1>
                     </div>
                     <div className="content">
-                        <NavigationButton direction="previous" data={navigationHandler("previous")} />
+                        <NavigationButton direction="previous" data={navigationHandler("previous")} aria-label={`${navigationHandler("previous").info.chapterNumber}`} />
                         <div className="verses">
                             {chapterData.verses.map((text: string, index: number): React.JSX.Element => {
                                 const verse: number = index + 1
                                 
                                 return (
-                                    <div key={verse} style={{ animation: `appear-from-top 500ms ease ${verse * 25}ms both` }}>
-                                        <sup className="verse">{verse}</sup>
+                                    <div className="verse" key={verse} style={{ animation: `appear-from-top 500ms ease ${verse * 25}ms both` }}>
+                                        <sup className="number">{verse}</sup>
                                         <p className="text">{text}</p>
                                     </div>
                                 )
                             })}
                         </div>
-                        <NavigationButton direction="next" data={navigationHandler("next")} />
+                        <NavigationButton direction="next" data={navigationHandler("next")} aria-label={`${navigationHandler("next").info.chapterNumber}`} />
                     </div>
                 </div>
             </section>

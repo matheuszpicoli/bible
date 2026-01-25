@@ -8,13 +8,18 @@ import {
     FaMagnifyingGlass,
     FaChevronLeft,
     FaChevronRight,
-    FaVolumeHigh,
-    FaVolumeXmark,
-    FaEllipsis
+    FaPlay,
+    FaStop,
+    FaEllipsis,
+    FaAlignCenter,
+    FaAlignJustify,
+    FaAlignLeft,
+    FaAlignRight,
+    FaA
 } from "react-icons/fa6"
 import type { IconType } from "react-icons"
 
-export type IconName = 
+export type TIconName = 
     "bible"         |
     "christianHarp" |
     "more"          |
@@ -24,18 +29,23 @@ export type IconName =
     "arrowLeft"     |
     "arrowRight"    |
     "search"        |
-    "volume"        |
-    "muted"         |
-    "dots"
+    "play"          |
+    "stop"          |
+    "dots"          |
+    "alignCenter"   |
+    "alignJustify"  |
+    "alignLeft"     |
+    "alignRight"    |
+    "font"
      
 class IconManager {
     private static icons: Partial<Record<string, IconType>> = {}
 
-    public static get(name: IconName): IconType {
+    public static get(name: TIconName): IconType {
         return this.icons[name]
     }
 
-    private static set(name: IconName, icon: IconType): void {
+    private static set(name: TIconName, icon: IconType): void {
         this.icons[name] = icon
     }
 
@@ -61,9 +71,14 @@ class IconManager {
         this.set("arrowLeft", FaChevronLeft)
         this.set("arrowRight", FaChevronRight)
         this.set("search", FaMagnifyingGlass)
-        this.set("volume", FaVolumeHigh)
-        this.set("muted", FaVolumeXmark)
+        this.set("play", FaPlay)
+        this.set("stop", FaStop)
         this.set("dots", FaEllipsis)
+        this.set("alignCenter", FaAlignCenter)
+        this.set("alignJustify", FaAlignJustify)
+        this.set("alignLeft", FaAlignLeft)
+        this.set("alignRight", FaAlignRight)
+        this.set("font", FaA)
     }
 }
 
