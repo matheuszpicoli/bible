@@ -8,14 +8,9 @@ import ChapterOptions from "../../../components/ChapterOptions"
 
 type TDirection = "previous" | "next"
 
-interface IChapterInfo {
-    bookAbbreviation: string
-    chapterNumber: number
-}
-
 interface INavigation {
-    info: Partial<IChapterInfo>
-    link: Partial<string>
+    info: Pick<IBibleResponse, "abbreviation" | "chapter">
+    link: string | null
 }
 
 export default async function Books({ params }: { params: Promise<{ book: string; chapter: string }> }): Promise<React.JSX.Element> {
@@ -31,57 +26,43 @@ export default async function Books({ params }: { params: Promise<{ book: string
     const currentBookTotalChapters: number = currentBook.chapters.length
     
     function navigationHandler(direction: TDirection): INavigation {
-        let chapterInfo: IChapterInfo | null = null
+        let abbreviation: string | null = null
+        let chapter: number | null = null
 
         switch (direction) {
             case "previous":
                 if (currentChapter > 1) {
-                    chapterInfo = {
-                        bookAbbreviation: currentBook.abbreviation,
-                        chapterNumber: currentChapter - 1
-                    }
+                    abbreviation = currentBook.abbreviation
+                    chapter = currentChapter - 1
                 } else if (currentBookIndex > 0) {
-                    const previousBook: IBibleBook = allBooksData.books[currentBookIndex - 1]
-                    const previousBookTotalChapters: number = previousBook.chapters.length
-                
-                    chapterInfo = {
-                        bookAbbreviation: previousBook.abbreviation,
-                        chapterNumber: previousBookTotalChapters
-                    }
+                    const previousBook = allBooksData.books[currentBookIndex - 1]
+
+                    abbreviation = previousBook.abbreviation
+                    chapter = previousBook.chapters.length
                 }
 
                 break
                 
             case "next":
                 if (currentChapter < currentBookTotalChapters) {
-                    chapterInfo = {
-                        bookAbbreviation: currentBook.abbreviation,
-                        chapterNumber: currentChapter + 1
-                    }
+                    abbreviation = currentBook.abbreviation
+                    chapter = currentChapter + 1
                 } else if (currentBookIndex < allBooksData.books.length - 1) {
-                    const nextBook: IBibleBook = allBooksData.books[currentBookIndex + 1]
-                    
-                    chapterInfo = {
-                        bookAbbreviation: nextBook.abbreviation,
-                        chapterNumber: 1
-                    }
+                    const nextBook = allBooksData.books[currentBookIndex + 1]
+
+                    abbreviation = nextBook.abbreviation
+                    chapter = 1
                 }
 
                 break
         }
         
-        if (chapterInfo) {
-            const link: string = `/books/${encodeURIComponent(chapterInfo.bookAbbreviation.toLowerCase())}/${chapterInfo.chapterNumber}`
-            
-            return {
-                info: chapterInfo,
-                link
-            }
-        }
+        const chapterInfo = { abbreviation, chapter }
+        const link = abbreviation && chapter ? `/books/${encodeURIComponent(abbreviation.toLowerCase())}/${chapter}` : null
         
         return {
-            info: null,
-            link: null
+            info: chapterInfo,
+            link
         }
     }
 
@@ -99,39 +80,65 @@ export default async function Books({ params }: { params: Promise<{ book: string
         return null
     }
 
+    const previousChapter: INavigation  = navigationHandler("previous")
+    const nextChapter: INavigation = navigationHandler("next")
+
     return (
         <React.Fragment>
-            <TitleManager title={`${chapterData.book} ${chapterData.chapter} (ARC)`} />
-            <section className="book-bible-page">
-                <div className="container">
-                    <div className="options">
-                        <select disabled>
-                            <option value="ARC">ARC</option>
-                        </select>
-                        <AudioPlayerButton verses={chapterData.verses} book={chapterData.book} chapter={chapterData.chapter} />
-                        <ChapterOptions />
-                    </div>
-                    <div className="chapter">
-                        <h1>{chapterData.book} <span className="chapter-number">{chapterData.chapter}</span></h1>
-                    </div>
-                    <div className="content">
-                        <NavigationButton direction="previous" data={navigationHandler("previous")} aria-label={`${navigationHandler("previous").info.chapterNumber}`} />
-                        <div className="verses">
-                            {chapterData.verses.map((text: string, index: number): React.JSX.Element => {
-                                const verse: number = index + 1
-                                
-                                return (
-                                    <div className="verse" key={verse} style={{ animation: `appear-from-top 500ms ease ${verse * 25}ms both` }}>
-                                        <sup className="number">{verse}</sup>
-                                        <p className="text">{text}</p>
-                                    </div>
-                                )
-                            })}
-                        </div>
-                        <NavigationButton direction="next" data={navigationHandler("next")} aria-label={`${navigationHandler("next").info.chapterNumber}`} />
-                    </div>
+            <TitleManager title={`${chapterData.book} ${chapterData.chapter} (ARC)`} />            
+            <main className="book-bible-page">
+                <div className="options">
+                    <select disabled aria-label="Versão da Bíblia">
+                        <option value="ARC">ARC</option>
+                    </select>
+                    <AudioPlayerButton 
+                        verses={chapterData.verses} 
+                        book={chapterData.book} 
+                        chapter={chapterData.chapter} 
+                    />
+                    <ChapterOptions />
                 </div>
-            </section>
+                <h1 className="chapter">
+                    {chapterData.book} 
+                    <span className="chapter-number">{chapterData.chapter}</span>
+                </h1>
+                <section className="verses" aria-label={`${chapterData.book} - Capítulo ${chapterData.chapter}`}>
+                    {chapterData.verses.map((text: string, index: number): React.JSX.Element => {
+                        const verseNumber: number = index + 1
+                        
+                        return (
+                            <article
+                                key={verseNumber}
+                                className={`ARC ${chapterData.abbreviation.toLowerCase()} c${chapterData.chapter}v${verseNumber}`}
+                                aria-label={`Versículo ${verseNumber}`}
+                            >
+                                <sup className="verse-number" aria-hidden="true">{verseNumber}</sup>
+                                <p className="verse-text">
+                                    {text.split(" ").map((word: string, index: number): React.JSX.Element => (
+                                        <span key={index} className="word">
+                                            {word}{index < text.split(" ").length - 1 && " "}
+                                        </span>
+                                    ))}
+                                </p>
+                            </article>
+                        )
+                    })}
+                </section>    
+                <nav className="navigation" aria-label="Navegação entre capítulos">
+                    <NavigationButton 
+                        direction="previous" 
+                        data={previousChapter} 
+                        aria-label={`Capítulo ${previousChapter.info.chapter}`}
+                        aria-details={`${previousChapter.info.chapter}`}
+                    />                       
+                    <NavigationButton 
+                        direction="next" 
+                        data={nextChapter} 
+                        aria-label={`Capítulo ${nextChapter.info.chapter}`}
+                        aria-details={`${nextChapter.info.chapter}`}
+                    />
+                </nav>
+            </main>
         </React.Fragment>
     )
 }

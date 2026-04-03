@@ -1,299 +1,194 @@
 @use "./variables.scss" as *;
 
+@use "sass:list";
+
 .book-bible-page {
-    .container {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    max-width: 800px;
+    padding: 1rem;
+
+    .options {
+        display: none; // Mudar depois
+    }
+
+    .chapter {
         align-items: center;
         display: flex;
-        flex-direction: column;
-        gap: 20px;
+        flex-direction: row;
+        gap: 10px;
         justify-content: center;
-        margin: 10px;
-        max-width: 50dvw;
-
-        @media (max-width: 1024px) {
-            max-width: 70dvw;
+        margin-block: 30px;
+        pointer-events: none;
+        position: relative;
+        user-select: none;
+        
+        .chapter-number {
+            animation: appear-from-top 500ms 25ms both;
+            display: inline-block;
         }
+    }
 
-        .options {
-            display: flex;
-            flex-direction: row;
-            gap: 10px;
+    .verses {
+        display: block;
+        width: 100%;
 
-            select {
-                all: unset;
-                align-items: center;
-                appearance: none;
-                background-color: #{$muted-color}15;
-                border-radius: 20px;
-                border: 1px solid #{$muted-color}50;
-                color: $primary-color;
-                cursor: pointer;
-                display: flex;
-                justify-content: center;
-                padding: 5px 10px;
-                position: relative;
-                transition: all 150ms ease;
+        article {
+            display: inline;
+            margin: 0;
+            padding: 0;
+
+            :where(.verse-number, .verse-text) {
+                display: inline;
+            }
+
+            .verse-number {
+                color: $muted-color;
+                font-size: .5rem;
+                font-weight: 600;
+                margin-inline: 5px;
+                opacity: .75;
+                pointer-events: none;
                 user-select: none;
-
-                &:disabled {
-                    color: $muted-color;
-                    opacity: .65;
-                    pointer-events: none;
-                }
             }
 
-            button {
-                all: unset;
-                align-items: center;
-                background-color: #{$muted-color}15;
-                border-radius: 20px;
-                border: 1px solid #{$muted-color}50;
-                cursor: pointer;
-                display: flex;
-                font-size: 1.2rem;
-                justify-content: center;
-                padding: 5px 10px;
-                position: relative;
-                transition: all 150ms ease;
-        
-                &:hover:not(:active) {
-                    background-color: $primary-color;
-        
-                    svg {
-                        fill: $dark-color;
+            .verse-text {
+                line-height: 1.8;
+            }
+
+            @mixin mark-range($reference, $start, $end: null) {
+                $book: list.nth($reference, 1);
+                $chapter: list.nth($reference, 2);
+                $verse: list.nth($reference, 3);
+                
+                @if $end {
+                    &.#{$book}.c#{$chapter}v#{$verse} .word:nth-child(n + #{$start}):nth-child(-n + #{$end}) {
+                        color: #ff0000;
+                    }
+                } @else {
+                    &.#{$book}.c#{$chapter}v#{$verse} .word:nth-child(n + #{$start}) {
+                        color: #ff0000;
                     }
                 }
-        
-                &:active {
-                    transform: scale(.85);
+            }
+
+            @mixin mark-verses-range($reference, $start, $end) {
+                $book: list.nth($reference, 1);
+                $chapter: list.nth($reference, 2);
+                
+                @for $verse from $start through $end {
+                    @include mark-range(($book, $chapter, $verse), 1);
                 }
-        
-                svg {
-                    fill: $primary-color;
-                }
+            }
+
+            &.ARC {
+                // Mateus
+                @include mark-range((mt, 3, 15), 5, 15);
+                @include mark-range((mt, 4, 4), 5, 24);
+                @include mark-range((mt, 4, 7), 3, 11);
+                @include mark-range((mt, 4, 10), 4, 18);
+                @include mark-range((mt, 4, 17), 10, 17);
+                @include mark-range((mt, 4, 19), 3, 12);
+                @include mark-verses-range((mt, 5), 3, 48);
+                @include mark-verses-range((mt, 6), 1, 34);
+                @include mark-verses-range((mt, 7), 1, 27);
+                @include mark-range((mt, 8, 3), 8, 10);
+                @include mark-range((mt, 8, 4), 4);
+                @include mark-range((mt, 8, 7), 5);
+                @include mark-range((mt, 8, 10), 12);
+                @include mark-verses-range((mt, 8), 11, 12);
+                @include mark-range((mt, 8, 13), 6, 12);
+                @include mark-range((mt, 8, 20), 4);
+                @include mark-range((mt, 8, 22), 4);
+                @include mark-range((mt, 8, 26), 4, 10);
+                @include mark-range((mt, 8, 32), 5, 5);
+                @include mark-range((mt, 9, 2), 10);
+                @include mark-range((mt, 9, 4), 8);
+                @include mark-range((mt, 9, 5), 1);
+                @include mark-range((mt, 9, 6), 1, 16);
+                @include mark-range((mt, 9, 6), 22);
+                @include mark-range((mt, 9, 9), 16, 16);
+                @include mark-range((mt, 9, 12), 5);
+                @include mark-range((mt, 9, 13), 1);
+                @include mark-range((mt, 9, 15), 4);
+                @include mark-verses-range((mt, 9), 16, 17);
+                @include mark-range((mt, 9, 22), 7, 15);
+                @include mark-range((mt, 9, 24), 2, 10);
+                @include mark-range((mt, 9, 28), 14, 20);
+                @include mark-range((mt, 9, 29), 7);
+                @include mark-range((mt, 9, 30), 11);
+                @include mark-range((mt, 9, 37), 6);
+                @include mark-range((mt, 9, 38), 1);
+                @include mark-range((mt, 10, 5), 9);
+                @include mark-verses-range((mt, 10), 6, 42);
+                @include mark-range((mt, 11, 4), 5);
+                @include mark-verses-range((mt, 11), 5, 6);
+                @include mark-range((mt, 11, 7), 14);
+                @include mark-verses-range((mt, 11), 8, 19);
+                @include mark-verses-range((mt, 11), 21, 24);
+                @include mark-range((mt, 11, 25), 6);
+                @include mark-verses-range((mt, 11), 26, 30);
+                @include mark-range((mt, 12, 3), 5);
+                @include mark-verses-range((mt, 12), 4, 8);
+                @include mark-range((mt, 12, 11), 5);
+                @include mark-range((mt, 12, 12), 1);
+                @include mark-range((mt, 12, 13), 5, 7);
+                @include mark-range((mt, 12, 25), 8);
+                @include mark-verses-range((mt, 12), 26, 37);
+                @include mark-range((mt, 12, 39), 7);
+                @include mark-verses-range((mt, 12), 40, 45);
+                @include mark-range((mt, 12, 48), 9);
+                @include mark-range((mt, 12, 49), 11);
+                @include mark-range((mt, 12, 50), 1);
             }
         }
 
-        .chapter {
-            align-items: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding-block: 30px;
-            pointer-events: none;
-            position: relative;
-            user-select: none;
-            
-            .chapter-number {
-                animation: appear-from-top 500ms 25ms both;
-                display: inline-block;
-            }
-        }
-
-        .content {
-            align-items: center;
+        + .navigation {
             display: flex;
             flex-direction: row;
-            justify-content: center;
-            position: relative;
+            justify-content: space-between;
+            margin-block: 30px;
             width: 100%;
-
-            .verses {
-                display: flex;
-                flex-direction: column;
-                gap: 5px;
-                transition: all 300ms ease;
-
-                * {
-                    transition: all 300ms ease;
-                }
-
-                .verse {
-                    padding: 5px 10px;
-
-                    .number {
-                        color: $muted-color;
-                        font-size: .65rem;
-                        font-style: italic;
-                        font-weight: 600;
-                        margin-inline: 5px;
-                        opacity: .5;
-                        user-select: none;
-                    }
-                    
-                    .text {
-                        cursor: default;
-                        display: inline;
-                        line-height: 1.8;
-                        text-indent: -10px;
-                        word-spacing: 2.5px;
-                    }
-                }
-            }
 
             .navigation-button {
                 all: unset;
                 align-items: center;
-                backdrop-filter: blur(10px);
-                background: #{$muted-color}15;
-                border-radius: 20px;
-                border: 1px solid #{$muted-color}50;
-                cursor: pointer;
                 display: flex;
                 flex-direction: row;
-                font-size: .9rem;
-                font-weight: 600;
+                gap: 5px;
                 justify-content: center;
-                padding: 10px;
-                position: fixed;
-                top: 50%;
-                transform: translateY(-50%);
-                transition: all 300ms ease;
-                user-select: none;
+                pointer-events: none;
+
+                &.previous::after, &.next::before {
+                    content: attr(aria-details);
+                    font-size: .85rem;
+                    font-weight: 100;
+                }
 
                 svg {
-                    fill: $primary-color;
-                    transition: all 300ms ease;
-                }
+                    cursor: pointer;
+                    pointer-events: all;
+                    transition: all 200ms ease;
+                    user-select: none;
 
-                &.previous {
-                    left: 5%;
-                }
-
-                &.next {
-                    right: 5%;
-                }
-
-                &:hover:not(:active) {
-                    background: $primary-color;
-
-                    &.previous {
-                        transform: translate(-5px, -50%);
-                    }
-
-                    &.next {
-                        transform: translate(5px, -50%);
-                    }
-
-                    svg {
-                        @each $theme in ("dark", "light") {
-                            @media (prefers-color-scheme: #{$theme}) {
-                                @if $theme == "light" {
-                                    fill: #{$light-color};
-                                } @else {
-                                    fill: #{$dark-color};
-                                }
+                    @each $theme in ("dark", "light") {
+                        @media (prefers-color-scheme: #{$theme}) {
+                            @if $theme == "light" {
+                                fill: $dark-color;
+                            } @else {
+                                fill: $light-color;
                             }
                         }
                     }
 
-                    &::before {
-                        align-items: flex-start;
-                        border-radius: 20px;
-                        content: attr(aria-label);
-                        display: flex;
-                        flex-direction: row;
-                        font-size: .9rem;
-                        font-weight: 600;
-                        gap: 5px;
-                        inset: 0;
-                        justify-content: center;
-                        left: 50%;
-                        padding: 5px 10px;
-                        pointer-events: none;
-                        position: absolute;
-                        top: -100%;
-                        transform: translate(-50%);
-                    }
-                }
-        
-                &:active {
-                    transform: scale(.9) translateY(-50%);
-                    
-                    &.previous {
-                        transform: scale(.9) translate(-5px, -50%);
-                    }
-
-                    &.next {
-                        transform: scale(.9) translate(5px, -50%);
+                    &:hover:not(:active) {
+                        opacity: .5;
+                        transform: scale(1.5);
                     }
                 }
             }
-        }
-    }
-}
-
-.offcanvas {
-    align-items: flex-end;
-    display: flex;
-    inset: 0;
-    justify-content: center;
-    position: fixed;
-    z-index: 999;
-    
-    .container {
-        animation: appear-from-top 500ms ease;
-        backdrop-filter: blur(10px);
-        background: #{$muted-color}15;
-        border-radius: 20px;
-        border: 1px solid #{$muted-color}50;
-        cursor: default;
-        display: inline-block;
-        flex-direction: column;
-        font-weight: 600;
-        padding-bottom: 8px;
-        padding-inline: 18px;
-        padding-top: 20px;
-        transition: all 300ms ease;
-        user-select: none;
-
-        .content {
-            display: flex;
-            flex-direction: row;
-            gap: 10px;
-            padding: 5px;
-
-            button {
-                align-items: center;
-                display: flex;
-                flex-direction: row;
-                gap: 10px;
-                padding: 10px 20px;
-
-                @for $child from 1 through 3 {
-                    &:nth-child(#{$child}) {
-                        animation: appear-from-top 500ms calc(50ms * $child) both;
-
-                        @if $child == 1 {
-                            svg {
-                                transform: scale(.75);
-                            }
-                        }
-                    }
-                }
-
-                &::after {
-                    content: attr(aria-label);
-                    font-size: .85rem;
-                    text-align: center;
-                }
-            }
-        }
-
-        &::before {
-            background: $muted-color;
-            border-radius: 20px;
-            content: "";
-            display: block;
-            height: 2px;
-            inset: 0;
-            left: 50%;
-            position: absolute;
-            text-align: center;
-            top: 10px;
-            transform: translate(-50%);
-            width: 30px;
-            cursor: pointer;
         }
     }
 }

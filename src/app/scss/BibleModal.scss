@@ -117,9 +117,9 @@
     }
 
     .book-testament {
-        color: $primary-color;
+        font-weight: 100;
+        opacity: .35;
         pointer-events: none;
-        text-align: center;
     }
 
     .books-found {

@@ -3,11 +3,11 @@ import {
     FaGripfire,
     FaListUl,
     FaXmark,
-    FaChevronDown,
-    FaChevronUp,
+    FaArrowDown,
+    FaArrowUp,
     FaMagnifyingGlass,
-    FaChevronLeft,
-    FaChevronRight,
+    FaArrowLeft,
+    FaArrowRight,
     FaPlay,
     FaStop,
     FaEllipsis,
@@ -66,10 +66,10 @@ class IconManager {
         this.set("christianHarp", FaGripfire)
         this.set("more", FaListUl)
         this.set("close", FaXmark)
-        this.set("arrowDown", FaChevronDown)
-        this.set("arrowUp", FaChevronUp)
-        this.set("arrowLeft", FaChevronLeft)
-        this.set("arrowRight", FaChevronRight)
+        this.set("arrowDown", FaArrowDown)
+        this.set("arrowUp", FaArrowUp)
+        this.set("arrowLeft", FaArrowLeft)
+        this.set("arrowRight", FaArrowRight)
         this.set("search", FaMagnifyingGlass)
         this.set("play", FaPlay)
         this.set("stop", FaStop)
