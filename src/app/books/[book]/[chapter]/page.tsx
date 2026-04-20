@@ -1,10 +1,11 @@
 import React, { createElement } from "react"
-import type { IBibleBook, IBibleResponse } from "../../../../../types/types"
-import IconManager from "../../../components/icons/IconManager"
 import Link from "next/link"
-import TitleManager from "../../../components/TitleManager"
+import type { IBibleBook, IBibleResponse } from "../../../../../types/types"
 import AudioPlayerButton from "../../../components/AudioPlayerButton"
 import ChapterOptions from "../../../components/ChapterOptions"
+import IconManager from "../../../components/icons/IconManager"
+import TitleManager from "../../../components/TitleManager"
+import RedLetterHighlighter from "../../../components/RedLetterHighlighter"
 
 type TDirection = "previous" | "next"
 
@@ -16,29 +17,33 @@ interface INavigation {
 export default async function Books({ params }: { params: Promise<{ book: string; chapter: string }> }): Promise<React.JSX.Element> {
     const { book, chapter } = await params
 
-    const baseAPIURL: string = "http://localhost:3000/api/bible"
-    const currentChapter: number = parseInt(chapter)
+    const baseAPIURL     : string = "http://localhost:3000/api/bible"
+    const currentChapter : number = parseInt(chapter)
+    
     const [chapterResponse, booksResponse] = await Promise.all([fetch(`${baseAPIURL}/${book.toLowerCase()}/${currentChapter}`), fetch(baseAPIURL)])
+    
     const chapterData: IBibleResponse = await chapterResponse.json()
+    
     const allBooksData: { books: Array<IBibleBook> } = await booksResponse.json()
-    const currentBook: IBibleBook = allBooksData.books.find((currentBook: IBibleBook): boolean => currentBook.book.toLowerCase() === chapterData.book.toLowerCase() || currentBook.abbreviation.toLowerCase() === chapterData.abbreviation.toLowerCase())
-    const currentBookIndex: number = allBooksData.books.indexOf(currentBook)
-    const currentBookTotalChapters: number = currentBook.chapters.length
+    
+    const currentBook              : IBibleBook = allBooksData.books.find((currentBook: IBibleBook): boolean => currentBook.book.toLowerCase() === chapterData.book.toLowerCase() || currentBook.abbreviation.toLowerCase() === chapterData.abbreviation.toLowerCase())
+    const currentBookIndex         : number     = allBooksData.books.indexOf(currentBook)
+    const currentBookTotalChapters : number     = currentBook.chapters.length
     
     function navigationHandler(direction: TDirection): INavigation {
-        let abbreviation: string | null = null
-        let chapter: number | null = null
+        let abbreviation : IBibleResponse["abbreviation"] | null = null
+        let chapter      : number | null = null
 
         switch (direction) {
             case "previous":
                 if (currentChapter > 1) {
                     abbreviation = currentBook.abbreviation
-                    chapter = currentChapter - 1
+                    chapter      = currentChapter - 1
                 } else if (currentBookIndex > 0) {
                     const previousBook = allBooksData.books[currentBookIndex - 1]
 
                     abbreviation = previousBook.abbreviation
-                    chapter = previousBook.chapters.length
+                    chapter      = previousBook.chapters.length
                 }
 
                 break
@@ -46,22 +51,26 @@ export default async function Books({ params }: { params: Promise<{ book: string
             case "next":
                 if (currentChapter < currentBookTotalChapters) {
                     abbreviation = currentBook.abbreviation
-                    chapter = currentChapter + 1
+                    chapter      = currentChapter + 1
                 } else if (currentBookIndex < allBooksData.books.length - 1) {
                     const nextBook = allBooksData.books[currentBookIndex + 1]
 
                     abbreviation = nextBook.abbreviation
-                    chapter = 1
+                    chapter      = 1
                 }
 
                 break
         }
-        
-        const chapterInfo = { abbreviation, chapter }
-        const link = abbreviation && chapter ? `/books/${encodeURIComponent(abbreviation.toLowerCase())}/${chapter}` : null
+
+        const link = abbreviation && chapter
+            ? `/books/${encodeURIComponent(abbreviation.toLowerCase())}/${chapter}`
+            : null
         
         return {
-            info: chapterInfo,
+            info: {
+                abbreviation,
+                chapter
+            },
             link
         }
     }
@@ -80,8 +89,8 @@ export default async function Books({ params }: { params: Promise<{ book: string
         return null
     }
 
-    const previousChapter: INavigation  = navigationHandler("previous")
-    const nextChapter: INavigation = navigationHandler("next")
+    const previousChapter : INavigation = navigationHandler("previous")
+    const nextChapter     : INavigation = navigationHandler("next")
 
     return (
         <React.Fragment>
@@ -109,7 +118,7 @@ export default async function Books({ params }: { params: Promise<{ book: string
                         return (
                             <article
                                 key={verseNumber}
-                                className={`ARC ${chapterData.abbreviation.toLowerCase()} c${chapterData.chapter}v${verseNumber}`}
+                                className={`ARC ${chapterData.abbreviation} c${chapterData.chapter}v${verseNumber}`}
                                 aria-label={`Versículo ${verseNumber}`}
                             >
                                 <sup className="verse-number" aria-hidden="true">{verseNumber}</sup>
@@ -139,6 +148,11 @@ export default async function Books({ params }: { params: Promise<{ book: string
                     />
                 </nav>
             </main>
+            <RedLetterHighlighter 
+                abbreviation={chapterData.abbreviation}
+                chapter={chapterData.chapter}
+                totalVerses={chapterData.verses.length}
+            />
         </React.Fragment>
     )
 }
