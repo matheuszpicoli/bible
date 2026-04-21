@@ -1033,6 +1033,87 @@ export default class Formatter {
                         [21, 22, 3],
                         [21, 23, 24]
                     ])
+                    // ----------------------------------------------------------------------------
+                    // Atos dos Apóstolos (ARC)
+                    // ----------------------------------------------------------------------------
+                    this.addRedLetters("At", [
+                        // Atos dos Apóstolos 1
+                        [1, 4, 14, 19],
+                        [1, 4, 22],
+                        [1, 5, 1],
+                        [1, 7, 3],
+                        [1, 8, 1],
+                        // Atos dos Apóstolos 9
+                        [9, 4, 11],
+                        [9, 5, 11],
+                        [9, 6, 17],
+                        [9, 10, 16, 16],
+                        [9, 11, 5],
+                        [9, 12, 1],
+                        [9, 15, 5],
+                        [9, 16, 1],
+                        // Atos dos Apóstolos 10
+                        [10, 13, 6],
+                        [10, 15, 8],
+                        // Atos dos Apóstolos 11
+                        [11, 16, 9],
+                        // Atos dos Apóstolos 18
+                        [18, 9, 11],
+                        [18, 10, 1],
+                        // Atos dos Apóstolos 20
+                        [20, 35, 22],
+                        // Atos dos Apóstolos 22
+                        [22, 7, 12],
+                        [22, 8, 9],
+                        [22, 10, 11],
+                        [22, 18, 7],
+                        [22, 21, 3],
+                        // Atos dos Apóstolos 23
+                        [23, 11, 9],
+                        // Atos dos Apóstolos 26
+                        [26, 14, 18],
+                        [26, 15, 10],
+                        ...this.addRedLettersRange(26, 16, 18)
+                    ])
+                    // ----------------------------------------------------------------------------
+                    // 1 Coríntios (ARC)
+                    // ----------------------------------------------------------------------------
+                    this.addRedLetters("1Co", [
+                        // 1 Coríntios 11
+                        [11, 24, 9],
+                        [11, 25, 10]
+                    ])
+                    // ----------------------------------------------------------------------------
+                    // 2 Coríntios (ARC)
+                    // ----------------------------------------------------------------------------
+                    this.addRedLetters("2Co", [
+                        // 2 Coríntios 12
+                        [12, 9, 3, 15]
+                    ])
+                    // ----------------------------------------------------------------------------
+                    // Apocalipse (ARC)
+                    // ----------------------------------------------------------------------------
+                    this.addRedLetters("Ap", [
+                        // Apocalipse 1
+                        [1, 8, 1, 12],
+                        [1, 8, 16],
+                        [1, 11, 3],
+                        [1, 17, 21],
+                        ...this.addRedLettersRange(1, 18, 20),
+                        // Apocalipse 2
+                        ...this.addRedLettersRange(2, 1, 29),
+                        // Apocalipse 3
+                        ...this.addRedLettersRange(3, 1, 22),
+                        // Apocalipse 4
+                        [4, 1, 26],
+                        // Apocalipse 16
+                        [16, 15, 1],
+                        // Apocalipse 22
+                        [22, 7, 1],
+                        ...this.addRedLettersRange(22, 12, 13),
+                        [22, 16, 1],
+                        [22, 20, 7, 9]
+                    ])
 
                     break
                     
@@ -1047,7 +1128,7 @@ export default class Formatter {
             return
         }
 
-        const words: NodeListOf<Element> = document.querySelectorAll(`.${this.version}.${abbreviation}.c${chapter}v${verse} .word`)
+        const words: NodeListOf<Element> = document.querySelectorAll(`.${this.version}.${CSS.escape(abbreviation)}.c${chapter}v${verse} .word`)
 
         if (words.length === 0) {
             return
