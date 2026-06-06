@@ -4,14 +4,14 @@ import { RefObject, useLayoutEffect, useRef } from "react"
 import type { IBibleResponse } from "../../../types/types"
 import Formatter from "../utils/Formatter"
 
-export default function RedLetterHighlighter(props: Pick<IBibleResponse, "abbreviation" | "chapter" | "totalVerses">): React.JSX.Element {
+export default function Highlighter(props: Pick<IBibleResponse, "abbreviation" | "chapter" | "totalVerses">): React.JSX.Element {
     const { abbreviation, chapter, totalVerses } = props
     
     const formatterRef  : RefObject<Formatter> = useRef<Formatter>(null)
     const hasAppliedRef : RefObject<boolean>   = useRef<boolean>(false)
 
     useLayoutEffect((): void => {
-        const applyRedLetters = (): boolean => {
+        const applyHighlight = (): boolean => {
             if (hasAppliedRef.current) {
                 return false
             }
@@ -29,7 +29,7 @@ export default function RedLetterHighlighter(props: Pick<IBibleResponse, "abbrev
             return true
         }
 
-        applyRedLetters()
+        applyHighlight()
     }, [abbreviation, chapter, totalVerses])
 
     return null

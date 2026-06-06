@@ -5,7 +5,7 @@ import AudioPlayerButton from "../../../components/AudioPlayerButton"
 import ChapterOptions from "../../../components/ChapterOptions"
 import IconManager from "../../../components/icons/IconManager"
 import TitleManager from "../../../components/TitleManager"
-import RedLetterHighlighter from "../../../components/RedLetterHighlighter"
+import Highlighter from "../../../components/Highlighter"
 
 type TDirection = "previous" | "next"
 
@@ -94,7 +94,7 @@ export default async function Books({ params }: { params: Promise<{ book: string
 
     return (
         <React.Fragment>
-            <TitleManager title={`${chapterData.book} ${chapterData.chapter} (ARC)`} />            
+            <TitleManager title={`${chapterData.book} ${chapterData.chapter} | ARC`} />            
             <main className="book-bible-page">
                 <div className="options">
                     <select disabled aria-label="Versão da Bíblia">
@@ -132,7 +132,7 @@ export default async function Books({ params }: { params: Promise<{ book: string
                             </article>
                         )
                     })}
-                </section>    
+                </section>
                 <nav className="navigation" aria-label="Navegação entre capítulos">
                     <NavigationButton 
                         direction="previous" 
@@ -148,7 +148,7 @@ export default async function Books({ params }: { params: Promise<{ book: string
                     />
                 </nav>
             </main>
-            <RedLetterHighlighter 
+            <Highlighter
                 abbreviation={chapterData.abbreviation}
                 chapter={chapterData.chapter}
                 totalVerses={chapterData.verses.length}
