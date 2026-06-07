@@ -1603,6 +1603,111 @@ export default class Formatter {
                     [27, 16, "Voto de um campo e o resgate dele"],
                     [27, 28, "Não há resgate para as coisas consagradas"]
                 ])
+                // ----------------------------------------------------------------------------
+                // Números (ARC)
+                // ----------------------------------------------------------------------------
+                this.addRules(this.titleRules, "Nm", [
+                    // Números 1
+                    [1, 1, "Deus manda Moisés numerar as tribos"],
+                    [1, 47, "Os levitas não são contados"],
+                    // Números 2
+                    [2, 1, "A ordem das tribos no acampamento"],
+                    // Números 3
+                    [3, 1, "Os filhos de Arão e os levitas são escolhidos para o serviço do tabernáculo"],
+                    // Números 4
+                    [4, 1, "Os deveres dos levitas"],
+                    // Números 5
+                    [5, 1, "O leproso e o imundo são lançados fora do arraial"],
+                    [5, 11, "A prova da mulher suspeita de adultério"],
+                    // Números 6
+                    [6, 1, "A lei do nazireado"],
+                    [6, 22, "O modo de abençoar os filhos de Israel"],
+                    // Números 7
+                    [7, 1, "As ofertas dos príncipes na dedicação do tabernáculo e do altar"],
+                    // Números 8
+                    [8, 1, "Como devem ser acesas as lâmpadas"],
+                    [8, 5, "A consagração dos levitas"],
+                    // Números 9
+                    [9, 1, "A celebração da Páscoa no deserto do Sinai"],
+                    [9, 6, "Segunda celebração para os ausentes e os imundos"],
+                    [9, 15, "A nuvem guiando a marcha dos israelitas"],
+                    // Números 10
+                    [10, 1, "As duas trombetas de prata"],
+                    [10, 11, "Os israelitas partem do Sinai"],
+                    [10, 29, "Moisés roga a Hobabe que vá com eles"],
+                    // Números 11
+                    [11, 1, "As murmurações dos israelitas"],
+                    [11, 11, "Moisés acha pesado o seu cargo"],
+                    [11, 16, "Deus designa setenta anciãos para ajudarem Moisés"],
+                    // Números 12
+                    [12, 1, "A sedição de Miriã e Arão"],
+                    // Números 13
+                    [13, 1, "Doze homens são enviados para espiar a terra de Canaã"],
+                    // Números 14
+                    [14, 1, "Os israelitas querem voltar para o Egito"],
+                    [14, 26, "Aos murmuradores não é permitido entrar na terra de Canaã"],
+                    // Números 15
+                    [15, 1, "A repetição de diversas leis"],
+                    [15, 37, "A lei acerca das bordas das vestes"],
+                    // Números 16
+                    [16, 1, "A rebelião de Corá, Datã e Abirão"],
+                    // Números 17
+                    [17, 1, "A vara de Arão floresce"],
+                    // Números 18
+                    [18, 1, "Os deveres e direitos dos sacerdotes e dos levitas"],
+                    // Números 19
+                    [19, 1, "A água da separação"],
+                    // Números 20
+                    [20, 1, "A morte de Miriã"],
+                    [20, 7, "Moisés fere a rocha, e as águas saem"],
+                    [20, 14, "Moisés solicita passagem pelo Edom"],
+                    [20, 22, "A morte de Arão"],
+                    // Números 21
+                    [21, 1, "Os israelitas destroem os cananeus"],
+                    [21, 4, "As serpentes ardentes e a serpente de metal"],
+                    [21, 10, "Jornadas dos israelitas"],
+                    [21, 21, "Os israelitas ferem os reis de Moabe e de Basã"],
+                    // Números 22
+                    [22, 1, "Balaque e Balaão"],
+                    // Números 23
+                    [23, 1, "Balaque edifica sete altares"],
+                    [23, 18, "As profecias de Balaão"],
+                    // Números 25
+                    [25, 1, "Os israelitas pecam com as filhas dos moabitas"],
+                    // Números 26
+                    [26, 1, "Deus manda tomar a soma de todos os israelitas"],
+                    [26, 52, "A lei acerca da divisão da terra"],
+                    // Números 27
+                    [27, 1, "A lei acerca das heranças"],
+                    [27, 12, "Deus anuncia a morte de Moisés"],
+                    [27, 18, "Josué é designado sucessor de Moisés"],
+                    // Números 28
+                    [28, 1, "O holocausto perpétuo"],
+                    [28, 9, "As ofertas nos sábados, nas luas novas, na Páscoa e no dia das primícias"],
+                    // Números 29
+                    [29, 1, "As ofertas na Festa das Trombetas"],
+                    [29, 12, "As ofertas nas festas solenes"],
+                    // Números 30
+                    [30, 1, "A lei acerca dos votos das mulheres"],
+                    // Números 31
+                    [31, 1, "A vitória sobre os midianitas"],
+                    [31, 13, "A purificação dos soldados"],
+                    [31, 25, "A divisão da presa"],
+                    [31, 48, "A oferta voluntária dos capitães"],
+                    // Números 32
+                    [32, 1, "As tribos de Rúben e Gade pedem a terra de Gileade"],
+                    // Números 33
+                    [33, 1, "As jornadas desde o Egito até Moabe"],
+                    [33, 50, "Deus manda lançar fora os moradores de Canaã"],
+                    // Número 34
+                    [34, 1, "Os confins da terra"],
+                    [34, 16, "Os homens que devem dividir a terra"],
+                    // Números 35
+                    [35, 1, "As cidades dos levitas"],
+                    [35, 9, "Seis cidades de refúgio"],
+                    // Números 36
+                    [36, 1, "Casamento de herdeiras"]
+                ])
 
                 break
 
