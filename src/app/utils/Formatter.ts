@@ -1513,6 +1513,96 @@ export default class Formatter {
                     [40, 17, "O tabernáculo é levantado"],
                     [40, 34, "A nuvem cobre o tabernáculo"]
                 ])
+                // ----------------------------------------------------------------------------
+                // Levítico (ARC)
+                // ----------------------------------------------------------------------------
+                this.addRules(this.titleRules, "Lv", [
+                    // Levítico 1
+                    [1, 1, "Os holocaustos"],
+                    // Levítico 2
+                    [2, 1, "As ofertas de manjares"],
+                    // Levítico 3
+                    [3, 1, "Os sacrifícios de paz ou das graças"],
+                    // Levítico 4
+                    [4, 1, "O sacrifício pelos erros dos sacerdotes"],
+                    [4, 13, "O sacrifício pelos erros do povo"],
+                    [4, 22, "O sacrifício pelos erros de um príncipe"],
+                    [4, 27, "O sacrifício pelos erros de qualquer pessoa"],
+                    // Levítico 5
+                    [5, 1, "O sacrifício pelos pecados ocultos"],
+                    [5, 14, "O sacrifício pelo sacrilégio"],
+                    [5, 17, "O sacrifício pelos pecados de ignorância"],
+                    // Levítico 6
+                    [6, 1, "O sacrifício pelos pecados voluntários"],
+                    [6, 8, "A lei do holocausto"],
+                    [6, 14, "A lei da oferta de manjares"],
+                    [6, 19, "A oferta na consagração dos sacerdotes"],
+                    [6, 24, "A lei da expiação do pecado"],
+                    // Levítico 7
+                    [7, 1, "A lei da expiação da culpa"],
+                    [7, 11, "A lei do sacrifício da paz"],
+                    [7, 22, "Deus proíbe comer gordura e sangue"],
+                    [7, 28, "A porção dos sacerdotes"],
+                    // Levítico 8
+                    [8, 1, "A consagração de Arão e seus filhos"],
+                    // Levítico 9
+                    [9, 1, "Arão oferece sacrifícios por si e pelo povo"],
+                    // Levítico 10
+                    [10, 1, "Nadabe e Abiú morrem diante do Senhor"],
+                    [10, 12, "A lei acerca das coisas santas"],
+                    // Levítico 11
+                    [11, 1, "Os animais que se devem comer e os que se não devem comer"],
+                    // Levítico 12
+                    [12, 1, "A purificação da mulher depois do parto"],
+                    // Levítico 13
+                    [13, 1, "As leis acerca da praga da lepra"],
+                    // Levítico 14
+                    [14, 1, "A lei acerca do leproso depois de sarado"],
+                    [14, 33, "A lei acerca da lepra numa casa"],
+                    // Levítico 15
+                    [15, 1, "Imundícias do homem e da mulher"],
+                    // Levítico 16
+                    [16, 1, "Como Arão deve entrar no santuário"],
+                    [16, 11, "O sacrifício pelo próprio sumo sacerdote"],
+                    [16, 15, "O sacrifício pelo povo"],
+                    [16, 29, "A festa anual das expiações"],
+                    // Levítico 17
+                    [17, 1, "O sangue de todos os animais deve trazer-se à porta do tabernáculo"],
+                    [17, 10, "A proibição de comer sangue"],
+                    // Levítico 18
+                    [18, 1, "Casamentos ilícitos"],
+                    [18, 19, "Uniões abomináveis"],
+                    // Levítico 19
+                    [19, 1, "A repetição de diversas leis"],
+                    // Levítico 20
+                    [20, 1, "As penas de diversos crimes"],
+                    // Levítico 21
+                    [21, 1, "Leis acerca dos sacerdotes"],
+                    // Levítico 22
+                    [22, 1, "A lei acerca de comer coisas santas"],
+                    [22, 17, "Os animais sacrificados devem ser sem defeito"],
+                    // Levítico 23
+                    [23, 1, "As festas solenes do Senhor"],
+                    [23, 3, "O Sábado"],
+                    [23, 4, "A Páscoa"],
+                    [23, 9, "As Primícias"],
+                    [23, 15, "O Pentecostes"],
+                    [23, 26, "O Dia da Expiação"],
+                    [23, 33, "A Festa dos Tabernáculos"],
+                    // Levítico 24
+                    [24, 1, "A lei acerca das lâmpadas"],
+                    [24, 5, "O pão para a mesa do Senhor"],
+                    [24, 10, "A pena do pecado da blasfêmia"],
+                    // Levítico 25
+                    [25, 1, "O Ano de Descanso"],
+                    [25, 8, "O Ano do Jubileu"],
+                    // Levítico 26
+                    [26, 1, "Mandamentos, promessas e ameaças"],
+                    // Levítico 27
+                    [27, 1, "Votos particulares e a avaliação deles"],
+                    [27, 16, "Voto de um campo e o resgate dele"],
+                    [27, 28, "Não há resgate para as coisas consagradas"]
+                ])
 
                 break
 
