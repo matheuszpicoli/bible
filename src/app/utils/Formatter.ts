@@ -1206,163 +1206,312 @@ export default class Formatter {
         switch (this.version) {
             case "ARC":
                 // ----------------------------------------------------------------------------
-                // Genêsis (ARC)
+                // Gênesis (ARC)
                 // ----------------------------------------------------------------------------
                 this.addRules(this.titleRules, "Gn", [
-                    // Genêsis 1
+                    // Gênesis 1
                     [1, 1, "A criação do céu e da terra e de tudo o que nele se contém"],
                     [1, 24, "A criação dos seres viventes"],
-                    // Genêsis 2
+                    // Gênesis 2
                     [2, 4, "A formação do jardim do Éden"],
                     [2, 18, "Como Deus criou a mulher"],
-                    // Genêsis 3
+                    // Gênesis 3
                     [3, 1, "A tentação de Eva e a queda do homem"],
-                    // Genêsis 4
+                    // Gênesis 4
                     [4, 1, "O nascimento de Caim, Abel e Sete"],
                     [4, 8, "O primeiro homicídio"],
-                    // Genêsis 5
+                    // Gênesis 5
                     [5, 1, "A genealogia de Sete"],
-                    // Genêsis 6
+                    // Gênesis 6
                     [6, 1, "A corrupção geral do gênero humano"],
                     [6, 13, "Deus anuncia o dilúvio a Noé"],
-                    // Genêsis 7
+                    // Gênesis 7
                     [7, 1, "Noé e sua família entram na arca"],
                     [7, 17, "O dilúvio"],
-                    // Genêsis 8
+                    // Gênesis 8
                     [8, 1, "As águas do dilúvio diminuem"],
                     [8, 7, "Noé solta um corvo e depois uma pomba"],
                     [8, 15, "Noé e sua família saem da arca"],
-                    // Genêsis 9
+                    // Gênesis 9
                     [9, 1, "O pacto que Deus fez com Noé"],
                     [9, 20, "Noé planta uma vinha"],
-                    // Genêsis 10
+                    // Gênesis 10
                     [10, 1, "Os descendentes de Noé"],
-                    // Genêsis 11
+                    // Gênesis 11
                     [11, 1, "Toda a terra com uma mesma língua"],
                     [11, 7, "A confusão das línguas"],
-                    // Genêsis 12
+                    // Gênesis 12
                     [12, 1, "Deus chama Abrão e lhe faz promessas"],
                     [12, 10, "Abrão desce ao Egito"],
-                    // Genêsis 13
+                    // Gênesis 13
                     [13, 1, "Abrão volta do Egito"],
                     [13, 7, "Abrão e Ló separam-se"],
-                    // Genêsis 14
+                    // Gênesis 14
                     [14, 1, "Guerra de quatro reis contra cinco"],
                     [14, 12, "Ló é levado cativo"],
                     [14, 18, "Melquisedeque abençoa a Abrão"],
-                    // Genêsis 15
+                    // Gênesis 15
                     [15, 1, "Deus anima a Abrão e promete-lhe um filho"],
                     [15, 17, "Deus faz um pacto com Abrão"],
-                    // Genêsis 16
+                    // Gênesis 16
                     [16, 1, "Agar é dada por mulher de Abrão"],
-                    // Genêsis 17
+                    // Gênesis 17
                     [17, 1, "Deus muda o nome de Abrão"],
                     [17, 15, "Deus muda o nome de Sarai"],
                     [17, 23, "A instituição da circuncisão"],
-                    // Genêsis 18
+                    // Gênesis 18
                     [18, 1, "Aparecem três anjos a Abraão"],
                     [18, 17, "Deus anuncia a destruição de Sodoma e Gomorra"],
                     [18, 23, "Abraão intercede junto a Deus pelos homens"],
-                    // Genêsis 19
+                    // Gênesis 19
                     [19, 1, "Ló recebe os dois anjos em sua casa"],
                     [19, 24, "A destruição de Sodoma e Gomorra"],
-                    // Genêsis 20
+                    // Gênesis 20
                     [20, 1, "Abraão nega que Sara é sua mulher"],
-                    // Genêsis 21
+                    // Gênesis 21
                     [21, 1, "O nascimento de Isaque"],
                     [21, 14, "O despedimento de Agar e Ismael"],
                     [21, 22, "Abimeleque faz um pacto com Abraão"],
-                    // Genêsis 22
+                    // Gênesis 22
                     [22, 1, "Deus manda Abraão matar seu filho Isaque"],
-                    // Genêsis 23
+                    // Gênesis 23
                     [23, 1, "A morte de Sara"],
-                    // Genêsis 24
+                    // Gênesis 24
                     [24, 1, "Abraão manda seu servo buscar uma mulher para Isaque"],
                     [24, 15, "O encontro de Rebeca"],
                     [24, 58, "Rebeca consente em casar com Isaque"],
-                    // Genêsis 25
+                    // Gênesis 25
                     [25, 1, "Abraão casa com Quetura e tem filhos dela"],
                     [25, 8, "Abraão morre"],
                     [25, 12, "Os descendentes de Ismael"],
                     [25, 19, "Os descendentes de Isaque"],
                     [25, 24, "O nascimento de Esaú e Jacó"],
-                    // Genêsis 26
+                    // Gênesis 26
                     [26, 1, "Isaque vai a Gerar por causa da fome"],
                     [26, 26, "Abimeleque faz um pacto com Isaque"],
-                    // Genêsis 27
+                    // Gênesis 27
                     [27, 1, "Isaque manda Esaú fazer-lhe um guisado"],
                     [27, 6, "Rebeca e Jacó enganam Isaque"],
                     [27, 30, "Esaú traz ao seu pai o guisado e descobre que Jacó já tomou a bênção"],
-                    // Genêsis 28
+                    // Gênesis 28
                     [28, 1, "Isaque manda Jacó a Padã-Arã"],
                     [28, 10, "A visão da escada de Jacó"],
                     [28, 18, "A coluna de Betel"],
-                    // Genêsis 29
+                    // Gênesis 29
                     [29, 1, "Jacó chega ao poço de Harã"],
                     [29, 9, "Jacó encontra Raquel"],
                     [29, 21, "Labão engana Jacó"],
                     [29, 28, "Jacó casa com Raquel"],
                     [29, 32, "O nascimento a Jacó de doze filhos e uma filha"],
-                    // Genêsis 30
+                    // Gênesis 30
                     [30, 27, "Labão faz um novo pacto com Jacó"],
                     [30, 37, "A maneira como Jacó se pagou de Labão"],
-                    // Genêsis 31
+                    // Gênesis 31
                     [31, 1, "Deus manda Jacó tornar à terra dos seus pais"],
                     [31, 22, "Labão prossegue atrás de Jacó"],
                     [31, 43, "O pacto entre Labão e Jacó em Galeede"],
-                    // Genêsis 32
+                    // Gênesis 32
                     [32, 3, "Jacó envia mensageiros a Esaú"],
                     [32, 22, "Jacó passa o vau de Jaboque e luta com um anjo"],
-                    // Genêsis 33
+                    // Gênesis 33
                     [33, 1, "O encontro de Esaú e Jacó"],
                     [33, 18, "Jacó chega a Siquém e levanta um altar"],
-                    // Genêsis 34
+                    // Gênesis 34
                     [34, 1, "Diná e os siquemitas"],
                     [34, 25, "A traição de Simeão e Levi"],
-                    // Genêsis 35
+                    // Gênesis 35
                     [35, 1, "Deus manda Jacó a Betel a levantar um altar"],
                     [35, 8, "A morte de Débora"],
                     [35, 16, "O nascimento de Benjamim e a morte de Raquel"],
-                    // Genêsis 36
+                    // Gênesis 36
                     [36, 1, "Os descendentes de Esaú"],
-                    // Genêsis 37
+                    // Gênesis 37
                     [37, 1, "José é vendido por seus irmãos"],
-                    // Genêsis 38
+                    // Gênesis 38
                     [38, 1, "Judá e Tamar"],
-                    // Genêsis 39
+                    // Gênesis 39
                     [39, 1, "José na casa de Potifar"],
-                    // Genêsis 40
+                    // Gênesis 40
                     [40, 1, "José, na prisão, interpreta dois sonhos"],
-                    // Genêsis 41
+                    // Gênesis 41
                     [41, 1, "José interpreta os sonhos de Faraó"],
                     [41, 38, "Faraó põe José como governador do Egito"],
-                    // Genêsis 42
+                    // Gênesis 42
                     [42, 1, "Os irmãos de José descem ao Egito"],
                     [42, 25, "Os irmãos de José voltam do Egito"],
-                    // Genêsis 43
+                    // Gênesis 43
                     [43, 1, "Os irmãos de José descem outra vez ao Egito"],
                     [43, 15, "Os irmãos de José jantam com ele"],
-                    // Genêsis 44
+                    // Gênesis 44
                     [44, 1, "A astúcia de José para deter seus irmãos"],
                     [44, 16, "A humilde súplica de Judá"],
-                    // Genêsis 45
+                    // Gênesis 45
                     [45, 1, "José dá-se a conhecer a seus irmãos"],
                     [45, 15, "Faraó ouve falar dos irmãos de José"],
-                    // Genêsis 46
+                    // Gênesis 46
                     [46, 1, "Jacó e toda a sua família descem ao Egito"],
                     [46, 28, "O encontro de José com seu pai"],
-                    // Genêsis 47
+                    // Gênesis 47
                     [47, 1, "José anuncia a Faraó a chegada de seu pai"],
                     [47, 13, "Como José comprou toda a terra do Egito para Faraó"],
-                    // Genêsis 48
+                    // Gênesis 48
                     [48, 1, "Jacó adoece"],
                     [48, 11, "Jacó abençoa José e os filhos deste"],
-                    // Genêsis 49
+                    // Gênesis 49
                     [49, 1, "Jacó abençoa seus filhos e morre"],
-                    // Genêsis 50
+                    // Gênesis 50
                     [50, 1, "A lamentação por Jacó e o seu enterro"],
                     [50, 14, "José anima a seus irmãos"],
                     [50, 22, "A morte de José"]
+                ])
+                // ----------------------------------------------------------------------------
+                // Êxodo (ARC)
+                // ----------------------------------------------------------------------------
+                this.addRules(this.titleRules, "Êx", [
+                    // Êxodo 1
+                    [1, 1, "Os descendentes de Jacó no Egito"],
+                    [1, 15, "As parteiras poupam a vida dos recém-nascidos"],
+                    // Êxodo 2
+                    [2, 1, "O nascimento de Moisés"],
+                    [2, 11, "Moisés mata um egípcio e foge para Midiã"],
+                    [2, 23, "A morte do rei do Egito"],
+                    // Êxodo 3
+                    [3, 1, "Deus fala com Moisés do meio da sarça ardente"],
+                    // Êxodo 4
+                    [4, 1, "Deus concede poderes a Moisés"],
+                    [4, 18, "Moisés volta para o Egito"],
+                    // Êxodo 5
+                    [5, 1, "Moisés e Arão falam a Faraó"],
+                    [5, 6, "Faraó aflige os israelitas"],
+                    [5, 20, "Os israelitas queixam-se de Moisés e Arão"],
+                    // Êxodo 6
+                    [6, 2, "Deus promete livrar os israelitas"],
+                    [6, 14, "Genealogias de Rúben, Simeão e Levi"],
+                    [6, 28, "Deus anima Moisés a falar outra vez a Faraó"],
+                    // Êxodo 7
+                    [7, 14, "O coração de Faraó mostra-se endurecido"],
+                    [7, 19, "A primeira praga: as águas tornam-se em sangue"],
+                    // Êxodo 8
+                    [8, 1, "A praga das rãs"],
+                    [8, 16, "A praga dos piolhos"],
+                    [8, 20, "A praga das moscas"],
+                    // Êxodo 9
+                    [9, 1, "A praga da peste nos animais"],
+                    [9, 8, "A praga das úlceras"],
+                    [9, 13, "As ameaças de Deus"],
+                    [9, 22, "A praga da saraiva"],
+                    // Êxodo 10
+                    [10, 1, "Deus ameaça Faraó com a praga dos gafanhotos"],
+                    [10, 12, "A praga dos gafanhotos"],
+                    [10, 21, "A praga das trevas"],
+                    // Êxodo 11
+                    [11, 1, "Deus anuncia a Moisés a morte de todos os primogênitos"],
+                    // Êxodo 12
+                    [12, 1, "A instituição da primeira Páscoa"],
+                    [12, 29, "A morte dos primogênitos"],
+                    [12, 37, "A saída dos israelitas do Egito"],
+                    // Êxodo 13
+                    [13, 1, "Os primogênitos são santificados a Deus"],
+                    [13, 17, "Deus guia o povo pelo caminho"],
+                    // Êxodo 14
+                    [14, 1, "Deus anuncia a ruína dos egípcios"],
+                    [14, 15, "A passagem pelo meio do mar"],
+                    [14, 27, "Os egípcios perecem no mar"],
+                    // Êxodo 15
+                    [15, 1, "O cântico de Moisés"],
+                    [15, 20, "A dança de Miriã e das mulheres"],
+                    [15, 23, "As águas amargas tornam-se doces"],
+                    // Êxodo 16
+                    [16, 1, "Deus manda o maná"],
+                    [16, 11, "Deus manda carne"],
+                    // Êxodo 17
+                    [17, 1, "A jornada pelo deserto de Sim e a falta de água"],
+                    [17, 8, "Amaleque peleja contra os israelitas"],
+                    // Êxodo 18
+                    [18, 1, "O sogro de Moisés traz-lhe sua mulher e seus filhos"],
+                    // Êxodo 19
+                    [19, 1, "Deus fala com Moisés no monte Sinai"],
+                    // Êxodo 20
+                    [20, 1, "Os dez mandamentos"],
+                    // Êxodo 21
+                    [21, 1, "As leis acerca dos servos e dos homicidas"],
+                    [21, 17, "As leis acerca dos que amaldiçoam os pais ou ferem qualquer pessoa"],
+                    // Êxodo 22
+                    [22, 1, "As leis acerca da propriedade"],
+                    [22, 16, "As leis acerca da imoralidade e da idolatria"],
+                    // Êxodo 23
+                    [23, 1, "O testemunho falso e a injustiça"],
+                    [23, 10, "O ano de descanso e o sábado"],
+                    [23, 14, "As três festas"],
+                    [23, 20, "Deus promete enviar um Anjo"],
+                    // Êxodo 24
+                    [24, 1, "Deus manda Moisés e os anciãos subir o monte"],
+                    // Êxodo 25
+                    [25, 1, "Deus manda o povo trazer ofertas para o tabernáculo"],
+                    [25, 10, "A arca de madeira de cetim"],
+                    [25, 17, "O propiciatório de ouro puro"],
+                    [25, 23, "A mesa de madeira de cetim"],
+                    // Êxodo 26
+                    [26, 1, "As cortinas do tabernáculo"],
+                    [26, 15, "As tábuas do tabernáculo"],
+                    [26, 31, "O véu do tabernáculo"],
+                    // Êxodo 27
+                    [27, 1, "O altar dos holocaustos"],
+                    [27, 9, "O pátio do tabernáculo"],
+                    [27, 20, "O azeite puro"],
+                    // Êxodo 28
+                    [28, 1, "Deus escolhe Arão e seus filhos para sacerdotes"],
+                    [28, 4, "As vestes sacerdotais"],
+                    [28, 30, "Urim e Tumim"],
+                    [28, 36, "A lâmina de ouro puro"],
+                    // Êxodo 29
+                    [29, 1, "O sacrifício e as cerimônias da consagração"],
+                    // Êxodo 30
+                    [30, 1, "O altar do incenso"],
+                    [30, 11, "O resgate da alma"],
+                    [30, 17, "A pia de cobre"],
+                    [30, 22, "O azeite da santa unção"],
+                    [30, 34, "O incenso santo"],
+                    // Êxodo 31
+                    [31, 1, "Os artífices da obra do tabernáculo"],
+                    [31, 12, "O sábado santo e as duas tábuas do Testemunho"],
+                    // Êxodo 32
+                    [32, 1, "O bezerro de ouro"],
+                    [32, 19, "Moisés quebra as tábuas do Testemunho"],
+                    [32, 25, "Moisés manda matar os idólatras"],
+                    [32, 30, "Moisés intercede pelo povo"],
+                    // Êxodo 33
+                    [33, 1, "Deus não irá no meio do povo mas enviará um anjo"],
+                    [33, 12, "Moisés roga a Deus a sua presença"],
+                    [33, 18, "Moisés roga a Deus que lhe mostre a sua glória"],
+                    // Êxodo 34
+                    [34, 1, "As novas tábuas dos dez mandamentos"],
+                    [34, 10, "Deus faz um pacto"],
+                    [34, 29, "O rosto de Moisés resplandece"],
+                    // Êxodo 35
+                    [35, 1, "O sábado e as ofertas para o tabernáculo"],
+                    [35, 20, "A prontidão do povo em trazer ofertas"],
+                    [35, 30, "Deus chama Bezalel e Aoliabe"],
+                    // Êxodo 36
+                    [36, 2, "Moisés entrega aos obreiros as ofertas do povo"],
+                    [36, 19, "A coberta de peles e as tábuas"],
+                    [36, 35, "Os véus e as colunas"],
+                    // Êxodo 37
+                    [37, 1, "A arca"],
+                    [37, 6, "O propiciatório"],
+                    [37, 10, "A mesa"],
+                    [37, 17, "O castiçal"],
+                    // Êxodo 38
+                    [38, 1, "O altar do holocausto"],
+                    [38, 9, "O pátio"],
+                    [38, 21, "A enumeração das coisas do tabernáculo"],
+                    // Êxodo 39
+                    [39, 1, "As vestes dos sacerdotes"],
+                    [39, 33, "O tabernáculo é entregue a Moisés"],
+                    // Êxodo 40
+                    [40, 1, "Deus manda Moisés levantar o tabernáculo"],
+                    [40, 17, "O tabernáculo é levantado"],
+                    [40, 34, "A nuvem cobre o tabernáculo"]
                 ])
 
                 break
