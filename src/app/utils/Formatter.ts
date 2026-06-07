@@ -1708,6 +1708,111 @@ export default class Formatter {
                     // Números 36
                     [36, 1, "Casamento de herdeiras"]
                 ])
+                // ----------------------------------------------------------------------------
+                // Deuteronômio (ARC)
+                // ----------------------------------------------------------------------------
+                this.addRules(this.titleRules, "Dt", [
+                    // Deuteronômio 1
+                    [1, 1, "O discurso de Moisés na planície do Jordão"],
+                    // Deuteronômio 2
+                    [2, 1, "Moisés fala acerca dos edomitas, moabitas e amonitas"],
+                    // Deuteronômio 3
+                    [3, 1, "Moisés fala acerca de Ogue, rei de Basã"],
+                    [3, 23, "A oração de Moisés para entrar em Canaã"],
+                    // Deuteronômio 4
+                    [4, 1, "Moisés exorta o povo à obediência"],
+                    [4, 41, "Moisés designa três das cidades de refúgio"],
+                    // Deuteronômio 5
+                    [5, 1, "A repetição dos dez mandamentos"],
+                    [5, 22, "O povo pede a Moisés para receber a lei do Senhor"],
+                    // Deuteronômio 6
+                    [6, 1, "O fim da lei é a obediência"],
+                    // Deuteronômio 7
+                    [7, 1, "Ordena-se a destruição dos cananeus e seus ídolos"],
+                    // Deuteronômio 8
+                    [8, 1, "Exortação a ter em memória os benefícios do Senhor"],
+                    // Deuteronômio 9
+                    [9, 1, "Moisés lembra aos israelitas as suas murmurações e suas infidelidades"],
+                    // Deuteronômio 10
+                    [10, 1, "Moisés fala das segundas tábuas da lei"],
+                    [10, 8, "Da vocação da tribo de Levi"],
+                    [10, 12, "Exortação à obediência"],
+                    // Deuteronômio 11
+                    [11, 13, "Os benefícios da obediência"],
+                    [11, 26, "A bênção e a maldição"],
+                    // Deuteronômio 12
+                    [12, 1, "O único lugar de culto é o escolhido pelo Senhor"],
+                    // Deuteronômio 13
+                    [13, 1, "O castigo dos falsos profetas e dos idólatras"],
+                    // Deuteronômio 14
+                    [14, 1, "Animais limpos e imundos"],
+                    [14, 22, "Os dízimos para o serviço do Senhor"],
+                    // Deuteronômio 15
+                    [15, 1, "O ano da remissão"],
+                    // Deuteronômio 16
+                    [16, 1, "As três festas: Páscoa, Pentecostes e Tabernáculos"],
+                    [16, 18, "Deveres dos juízes"],
+                    // Deuteronômio 17
+                    [17, 1, "O castigo da idolatria"],
+                    [17, 8, "Consulta dos sacerdotes"],
+                    [17, 14, "A eleição e os deveres de um rei"],
+                    // Deuteronômio 18
+                    [18, 1, "A herança e os direitos dos sacerdotes e dos levitas"],
+                    [18, 9, "As abominações das nações são proibidas"],
+                    [18, 15, "A promessa de um grande profeta"],
+                    // Deuteronômio 19
+                    [19, 1, "A quem pertencem os privilégios das cidades de refúgio"],
+                    [19, 14, "Acerca dos limites e das testemunhas"],
+                    // Deuteronômio 20
+                    [20, 1, "As leis da guerra"],
+                    // Deuteronômio 21
+                    [21, 1, "Expiação por uma morte cujo autor é desconhecido"],
+                    [21, 10, "Acerca da mulher prisioneira"],
+                    [21, 15, "O direito do primogênito"],
+                    [21, 18, "Acerca dos filhos desobedientes"],
+                    [21, 22, "Os cadáveres serão tirados do patíbulo"],
+                    // Deuteronômio 22
+                    [22, 1, "Caridade para com o próximo"],
+                    [22, 5, "Acerca das vestes do homem e das da mulher"],
+                    [22, 13, "As penas para diversos pecados cometidos para com mulheres"],
+                    // Deuteronômio 23
+                    [23, 1, "Pessoas que são excluídas das assembleias santas"],
+                    [23, 15, "Acerca de fugitivos, prostitutas, usura e votos"],
+                    // Deuteronômio 24
+                    [24, 1, "Acerca do divórcio, dos penhores, dos roubadores e da lepra"],
+                    [24, 10, "Acerca de empréstimos"],
+                    [24, 14, "Caridade para com os pobres, os estrangeiros e os órfãos"],
+                    // Deuteronômio 25
+                    [25, 1, "A pena de açoites"],
+                    [25, 5, "A obrigação de um homem casar com a viúva do seu irmão"],
+                    [25, 13, "Pesos e medidas justos"],
+                    [25, 17, "Amaleque será destruído"],
+                    // Deuteronômio 26
+                    [26, 1, "As primícias da terra"],
+                    [26, 12, "Oração daquele que deu os dízimos"],
+                    // Deuteronômio 27
+                    [27, 1, "A ordem de levantar um padrão e gravar nele a lei"],
+                    [27, 11, "As maldições que serão lançadas do monte Ebal"],
+                    // Deuteronômio 28
+                    [28, 1, "As bênçãos que serão lançadas do monte Gerizim"],
+                    [28, 15, "Castigos por desobediência"],
+                    // Deuteronômio 29
+                    [29, 1, "Deus faz um novo concerto com o povo"],
+                    // Deuteronômio 30
+                    [30, 1, "A misericórdia de Deus para com os que se arrependem"],
+                    [30, 11, "A lei do Senhor é bem patente"],
+                    // Deuteronômio 31
+                    [31, 1, "Moisés nomeia Josué seu sucessor"],
+                    [31, 9, "A lei deve ser lida ao povo de sete em sete anos"],
+                    [31, 14, "Deus dá a Josué o encargo do povo"],
+                    // Deuteronômio 32
+                    [32, 1, "Último cântico de Moisés"],
+                    // Deuteronômio 33
+                    [33, 1, "A majestade de Deus"],
+                    [33, 6, "As bênçãos das tribos"],
+                    // Deuteronômio 34
+                    [34, 1, "Moisés sobe o monte Nebo, vê a terra prometida e morre"]
+                ])
 
                 break
 
